@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:drawable="@drawable/welcome_t">
+    <target
+        android:name="a_0"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="a_1"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="a_2"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="i_0"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="i_1"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="m_0"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="m_1"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="m_2"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="d_0"
+        android:animation="@animator/welcome_t_anim"/>
+    <target
+        android:name="d_1"
+        android:animation="@animator/welcome_t_anim"/>
+
+</animated-vector>

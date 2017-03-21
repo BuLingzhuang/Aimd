@@ -3,6 +3,9 @@ package com.bulingzhuang.aimd;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.bulingzhuang.aimd.view.adapter.AZPagerAdapter;
+import com.bulingzhuang.aimd.view.support.ScrollOffsetTransformer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -40,6 +52,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        init();
+    }
+
+    private void init() {
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vp_content);
+        List<View> viewList = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            View inflate = LayoutInflater.from(this).inflate(R.layout.item_main_card, null);
+            TextView tvTextView = (TextView) inflate.findViewById(R.id.tv_content);
+            tvTextView.setText("Page-" + i);
+            viewList.add(inflate);
+        }
+
+        viewPager.setPageTransformer(true, new ScrollOffsetTransformer());
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setAdapter(new AZPagerAdapter(viewList));
     }
 
     @Override

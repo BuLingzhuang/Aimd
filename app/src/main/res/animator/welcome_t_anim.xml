@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:androd="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        androd:duration="2560"
+        androd:interpolator="@android:interpolator/accelerate_decelerate"
+        androd:propertyName="trimPathStart"
+        androd:repeatCount="0"
+        androd:repeatMode="reverse"
+        androd:valueFrom="1"
+        androd:valueTo="0"
+        androd:valueType="floatType">
+    </objectAnimator>
+</set>

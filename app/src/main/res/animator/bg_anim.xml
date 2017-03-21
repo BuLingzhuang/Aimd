@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator xmlns:androd="http://schemas.android.com/apk/res/android"
+                androd:duration="3000"
+                androd:interpolator="@android:interpolator/accelerate_cubic"
+                androd:propertyName="alpha"
+                androd:valueFrom="0"
+                androd:valueTo="1"
+                androd:valueType="floatType">
+</objectAnimator>

@@ -23,18 +23,18 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void init() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.vp_test);
-        List<View> viewList = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            View inflate = LayoutInflater.from(this).inflate(R.layout.item_main_card, null);
-            TextView tvTextView = (TextView) inflate.findViewById(R.id.tv_content);
-            tvTextView.setText("Page-" + i);
-            viewList.add(inflate);
-        }
-
-        viewPager.setPageTransformer(true, new ScrollOffsetTransformer());
-        viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(new AZPagerAdapter(viewList));
+//        ViewPager viewPager = (ViewPager) findViewById(R.id.vp_test);
+//        List<View> viewList = new ArrayList<>();
+//
+//        for (int i = 0; i < 5; i++) {
+//            View inflate = LayoutInflater.from(this).inflate(R.layout.item_main_card, null);
+//            TextView tvTextView = (TextView) inflate.findViewById(R.id.tv_content);
+//            tvTextView.setText("Page-" + i);
+//            viewList.add(inflate);
+//        }
+//
+//        viewPager.setPageTransformer(true, new ScrollOffsetTransformer());
+//        viewPager.setOffscreenPageLimit(2);
+//        viewPager.setAdapter(new AZPagerAdapter(viewList));
     }
 }

@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+    android:id="@+id/activity_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -23,19 +23,28 @@
             android:layout_marginTop="56dp">
 
             <ImageView
-                android:id="@+id/civ_icon"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
+                android:id="@+id/civ_portrait"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/icon_origin"/>
+                android:src="@drawable/user_portrait_bg"/>
 
             <ImageView
-                android:id="@+id/iv_icon_type"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/camera"/>
+                android:id="@+id/iv_portrait_type_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_origin"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_portrait_type"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_centerInParent="true"
+                android:paddingBottom="3dp"
+                android:src="@drawable/ic_camera"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -51,7 +60,7 @@
                 android:visibility="invisible"/>
 
             <EditText
-                android:id="@+id/et_login_phone"
+                android:id="@+id/et_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -67,7 +76,7 @@
                 />
 
             <View
-                android:id="@+id/v_login_phone"
+                android:id="@+id/v_login_email"
                 style="@style/view_horizontal_login"/>
 
             <EditText
@@ -121,12 +130,12 @@
                 style="@style/view_horizontal_login"/>
 
             <EditText
-                android:id="@+id/et_register_userName"
+                android:id="@+id/et_register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="账号(字母和数字)"
+                android:hint="邮箱(用于登录和找回密码)"
                 android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:minHeight="32dp"
@@ -137,7 +146,7 @@
                 />
 
             <View
-                android:id="@+id/v_register_userName"
+                android:id="@+id/v_register_email"
                 style="@style/view_horizontal_login"/>
 
 
@@ -192,6 +201,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/user_submit_type"
+            android:enabled="false"
             android:gravity="center"
             android:text="注册"
             android:textColor="@android:color/white"
@@ -211,7 +221,7 @@
                 android:layout_marginTop="4dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="8dp"
-                android:text="1241241241241"
+                android:text="@string/user_page_type_register"
                 android:textColor="@color/colorAccent"
                 android:textSize="15sp"
                 tools:targetApi="lollipop"/>

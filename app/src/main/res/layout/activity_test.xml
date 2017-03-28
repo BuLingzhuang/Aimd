@@ -1,21 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/white">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/ic_wx2"/>
+    <!--<ImageView-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--app:srcCompat="@drawable/ic_wx2"/>-->
 
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        app:srcCompat="@drawable/ic_wx2"/>
-</LinearLayout>
+    <!--<ImageView-->
+    <!--android:layout_width="400dp"-->
+    <!--android:layout_height="400dp"-->
+    <!--app:srcCompat="@drawable/ic_wx2"/>-->
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_register_loading_bg"/>
+
+        <!-- view长度：从0到50 -->
+        <View
+            android:id="@+id/line_0"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="48dp"
+            android:background="@color/colorPrimaryLight"/>
+
+        <View
+            android:id="@+id/line_1"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="64dp"
+            android:background="@color/colorPrimaryLight"/>
+
+        <View
+            android:id="@+id/line_2"
+            android:layout_width="00dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimaryLight"/>
+
+        <!-- left、top：从30 12 到 80 44-->
+        <ImageView
+            android:id="@+id/pencil"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@drawable/ic_register_loading_pencil"/>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="btn"
+        android:text="开始"/>
+</RelativeLayout>

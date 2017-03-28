@@ -28,4 +28,14 @@
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:background">@color/colorAccent</item>
     </style>
+
+    <style name="anim_popup_window">
+        <item name="android:windowEnterAnimation">@animator/popup_window_in</item>
+        <item name="android:windowExitAnimation">@animator/popup_window_out</item>
+    </style>
+
+    <style name="popupWindow_sh_anim_style">
+        <item name="android:windowEnterAnimation">@animator/pop_show_anim</item>
+        <item name="android:windowExitAnimation">@animator/pop_hidden_anim</item>
+    </style>
 </resources>

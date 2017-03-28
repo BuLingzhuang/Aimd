@@ -161,11 +161,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //头像、用户名、签名都跳转登录页面
+                //头像、用户名、签名都跳转登录页面
+            // TODO: 2017/3/27 测试
+            case R.id.btn_toolbarLogin:
+                startActivity(new Intent(this,TestActivity.class));
+                break;
             case R.id.iv_portrait:
             case R.id.tv_signature:
             case R.id.tv_username:
-            case R.id.btn_toolbarLogin:
                 startActivity(new Intent(this, UserActivity.class));
                 break;
         }

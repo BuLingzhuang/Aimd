@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+    android:background="#cc000000">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="240dp"
+        android:layout_height="388dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="120dp"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_register_loading_bg"/>
+
+                <!-- view长度：从0到50 -->
+                <View
+                    android:id="@+id/line_0"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="48dp"
+                    android:background="@color/colorPrimaryLight"/>
+
+                <View
+                    android:id="@+id/line_1"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="64dp"
+                    android:background="@color/colorPrimaryLight"/>
+
+                <View
+                    android:id="@+id/line_2"
+                    android:layout_width="00dp"
+                    android:layout_height="4dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="80dp"
+                    android:background="@color/colorPrimaryLight"/>
+
+                <!-- left、top：从30 12 到 80 44-->
+                <ImageView
+                    android:id="@+id/pencil"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    app:srcCompat="@drawable/ic_register_loading_pencil"/>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:text="放心，已经在注册啦...\n(๑•̀ㅂ•́)و"
+                android:textSize="16sp"
+                android:layout_marginBottom="48dp"
+                android:textColor="@color/colorPrimaryLight"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

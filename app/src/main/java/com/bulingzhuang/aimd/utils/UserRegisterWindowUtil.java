@@ -1,39 +1,62 @@
-package com.bulingzhuang.aimd;
+package com.bulingzhuang.aimd.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.transition.Fade;
 import android.transition.TransitionManager;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.bulingzhuang.aimd.utils.Tools;
+import com.bulingzhuang.aimd.R;
+import com.bulingzhuang.aimd.TestActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+/**
+ * Created by bulingzhuang
+ * on 2017/3/28
+ * E-mail:bulingzhuang@foxmail.com
+ */
 
-public class TestActivity extends AppCompatActivity {
+public class UserRegisterWindowUtil {
 
-    @Bind(R.id.pencil)
-    ImageView pencil;
-    @Bind(R.id.line_0)
-    View line0;
-    @Bind(R.id.line_1)
-    View line1;
-    @Bind(R.id.line_2)
-    View line2;
-    @Bind(R.id.activity_test)
-    RelativeLayout activity;
+    private View mLine_0;
+    private View mLine_1;
+    private View mLine_2;
+    private ImageView mPencil;
+    private FloatingActionButton mFab;
+    private PopupWindow mPopupWindow;
+    private TextView mTvTips;
+
+    private Context mContext;
+    private ViewGroup mViewGroup;
+    private AnimEndListener mListener;
+
+    public interface AnimEndListener {
+        void end();
+    }
+
+    public UserRegisterWindowUtil(Context context, ViewGroup viewGroup) {
+        mContext = context;
+        mViewGroup = viewGroup;
+    }
 
     private int currentNum;
     private int currentNumP;
@@ -52,44 +75,66 @@ public class TestActivity extends AppCompatActivity {
         this.currentNum = currentNum;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        ButterKnife.bind(this);
-        init();
+    public void execute(AnimEndListener listener) {
+        mListener = listener;
+        showPopupWindow();
     }
 
-    private void init() {
-//        ViewPager viewPager = (ViewPager) findViewById(R.id.vp_test);
-//        List<View> viewList = new ArrayList<>();
-//
-//        for (int i = 0; i < 5; i++) {
-//            View inflate = LayoutInflater.from(this).inflate(R.layout.item_main_card, null);
-//            TextView tvTextView = (TextView) inflate.findViewById(R.id.tv_content);
-//            tvTextView.setText("Page-" + i);
-//            viewList.add(inflate);
-//        }
-//
-//        viewPager.setPageTransformer(true, new ScrollOffsetTransformer());
-//        viewPager.setOffscreenPageLimit(2);
-//        viewPager.setAdapter(new AZPagerAdapter(viewList));
+    public void finishPopupWindow(){
+        mIsSucceed = true;
     }
 
-    public void btn(View view) {
+    /**
+     * 显示上传popupWindow
+     */
+    private void showPopupWindow() {
+
+        @SuppressLint("InflateParams") View inflate = LayoutInflater.from(mContext).inflate(R.layout.popup_user_register, null);
+        mLine_0 = inflate.findViewById(R.id.line_0);
+        mLine_1 = inflate.findViewById(R.id.line_1);
+        mLine_2 = inflate.findViewById(R.id.line_2);
+        mTvTips = (TextView) inflate.findViewById(R.id.tv_tips);
+        mPencil = (ImageView) inflate.findViewById(R.id.pencil);
+        Tools.changeFont(mTvTips);
+
+        mPopupWindow = new PopupWindow(inflate, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        mPopupWindow.setAnimationStyle(R.style.popupWindow_sh_anim_style);
+
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mPopupWindow = null;
+                if (mListener != null) {
+                    mListener.end();
+                }
+            }
+        });
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE && !mPopupWindow.isFocusable()) {
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mPopupWindow.showAtLocation(mViewGroup, Gravity.NO_GRAVITY, 0, 0);
+        startAnim();
+    }
+
+    private void startAnim() {
         getAnim();
-        ++num;
-        if (num ==3) {
-            mIsSucceed = true;
-            num = 0;
-        }
         mSet.start();
     }
 
     private void getAnim() {
         if (mSet == null) {
             mSet = new AnimatorSet();
-            ObjectAnimator anim = ObjectAnimator.ofInt(this, "currentNum", dp2px(this, 50));
+            ObjectAnimator anim = ObjectAnimator.ofInt(this, "currentNum", dp2px(mContext, 50));
             anim.setDuration(1000);
             anim.setRepeatCount(2);
             anim.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -99,13 +144,13 @@ public class TestActivity extends AppCompatActivity {
                     int value = (int) valueAnimator.getAnimatedValue("currentNum");
                     switch (lines) {
                         case 0:
-                            changeWidth(value, line0);
+                            changeWidth(value, mLine_0);
                             break;
                         case 1:
-                            changeWidth(value, line1);
+                            changeWidth(value, mLine_1);
                             break;
                         case 2:
-                            changeWidth(value, line2);
+                            changeWidth(value, mLine_2);
                             break;
                     }
 
@@ -139,7 +184,7 @@ public class TestActivity extends AppCompatActivity {
                 }
             });
 
-            ObjectAnimator animP = ObjectAnimator.ofInt(this, "currentNumP", dp2px(this, 50));
+            ObjectAnimator animP = ObjectAnimator.ofInt(this, "currentNumP", dp2px(mContext, 50));
             animP.setDuration(1000);
             animP.setRepeatCount(2);
             animP.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -147,10 +192,10 @@ public class TestActivity extends AppCompatActivity {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     int value = (int) valueAnimator.getAnimatedValue("currentNumP");
-                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) pencil.getLayoutParams();
-                    layoutParams.leftMargin = dp2px(TestActivity.this, 30) + value;
-                    layoutParams.topMargin = dp2px(TestActivity.this, 12) + pLines * dp2px(TestActivity.this, 16);
-                    pencil.setLayoutParams(layoutParams);
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mPencil.getLayoutParams();
+                    layoutParams.leftMargin = dp2px(mContext, 30) + value;
+                    layoutParams.topMargin = dp2px(mContext, 12) + pLines * dp2px(mContext, 16);
+                    mPencil.setLayoutParams(layoutParams);
                 }
             });
             animP.addListener(new Animator.AnimatorListener() {
@@ -184,32 +229,46 @@ public class TestActivity extends AppCompatActivity {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    Tools.showLogE("最后结束了，mIsSucceed："+mIsSucceed);
+                    Tools.showLogE("最后结束了，mIsSucceed：" + mIsSucceed);
                     if (mIsSucceed) {
-                        TransitionManager.beginDelayedTransition(activity, new Fade());
-                        pencil.setVisibility(View.GONE);
+                        TransitionManager.beginDelayedTransition(mViewGroup, new Fade());
+                        mTvTips.setText("注册成功");
+                        mPencil.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(333);
+                                    Message message = new Message();
+                                    message.arg1 = 3222222;
+                                    mHandler.sendMessage(message);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
                     } else {
                         lines = 0;
                         pLines = 0;
                         for (int i = 0; i < 3; i++) {
                             switch (i) {
                                 case 0:
-                                    changeWidth(0, line0);
+                                    changeWidth(0, mLine_0);
                                     break;
                                 case 1:
-                                    changeWidth(0, line1);
+                                    changeWidth(0, mLine_1);
                                     break;
                                 case 2:
-                                    changeWidth(0, line2);
+                                    changeWidth(0, mLine_2);
                                     break;
                             }
                         }
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) pencil.getLayoutParams();
-                        layoutParams.leftMargin = dp2px(TestActivity.this, 30);
-                        layoutParams.topMargin = dp2px(TestActivity.this, 12);
-                        pencil.setLayoutParams(layoutParams);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mPencil.getLayoutParams();
+                        layoutParams.leftMargin = dp2px(mContext, 30);
+                        layoutParams.topMargin = dp2px(mContext, 12);
+                        mPencil.setLayoutParams(layoutParams);
                         Message message = new Message();
-                        message.arg1 = 23333333;
+                        message.arg1 = 2333333;
                         mHandler.sendMessage(message);
                     }
                 }
@@ -233,7 +292,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public int dp2px(Context context, float dpValue) {
+    private int dp2px(Context context, float dpValue) {
         if (mScale == 0f) {
             mScale = context.getResources().getDisplayMetrics().density;
         }
@@ -244,9 +303,15 @@ public class TestActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.arg1 ==23333333) {
-                btn(null);
+            switch (msg.arg1) {
+                case 2333333:
+                    startAnim();
+                    break;
+                case 3222222:
+                    mPopupWindow.dismiss();
+                    break;
             }
         }
     };
+
 }

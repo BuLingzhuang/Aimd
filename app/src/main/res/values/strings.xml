@@ -1,8 +1,48 @@
 <resources>
-    <string name="app_name">Aimd</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="mobile_suit_title_img">Title Image</string>
+    <string name="gundam_img">Mobile Suit Picture</string>
+    <string name="msd_title_bg">Mobile Suit Detail Bg</string>
+    <string name="boxImage">Box Picture</string>
+    <string name="back_text">back</string>
+    <string name="about">About</string>
+    <string name="message">Message</string>
+    <string name="a_href"><a href="http://bbs.78dm.net/forum.php?mod=viewthread&amp;tid=291192">超链接</a></string>
+    <string name="tools_save_success">Save success，</string>
+    <string name="tools_download">Download：</string>
+    <string name="tools_saved">Has been saved，</string>
+    <string name="tools_save_failed">Save failed</string>
+    <string name="base_no_data">No Data</string>
+    <string name="base_network_error">Network Error</string>
+    <string name="mobile_load_all">Have to load all</string>
+    <string name="mst_failed_get_data">Failed to get the data：</string>
+    <string name="about_email">E-mail：bulingzhuang@foxmail.com</string>
+    <string name="sina_weibo">Sina weibo：卜令壮_hhy</string>
+    <string name="mst_included">"Have included：%d "</string>
+    <string name="mst_wrong_query">The wrong query：</string>
+    <string name="main_see_series">See the series：</string>
+    <string name="mobile_model_series">ModelSeries：</string>
+    <string name="mobile_price">Price（contain tax）：</string>
+    <string name="mobile_type">Type：</string>
+    <string name="mobile_launch_date">Launch Date：</string>
+    <string name="mobile_see_belong">Look at the body, belong to：</string>
+    <string name="main_see_about">See about</string>
+    <string name="main_again_touch">Again touch to the exit</string>
+    <string name="main_refresh_succeed">Refresh succeed</string>
+    <string name="splash_permissions">Please at the next startup to allow permissions</string>
+    <string name="menu_my_collection">Collection</string>
+    <string name="menu_download">Download</string>
+    <string name="mst_other_type">Other（Metal Build、SD、Robot…）\n1:??</string>
+    <string name="user_page_type_register">Existing account？To log in</string>
+    <string name="user_page_type_login">Haven’t account？Go to register</string>
+    <string name="e_code_202">Username has already been taken</string>
+    <string name="e_code_203">Email has already been taken</string>
+    <string name="e_code_205">A user with the specified email was not found</string>
+    <string name="e_code_210">The username and password mismatch</string>
+    <string name="e_code_211">Could not find user</string>
+    <string name="e_code_219">Login failed more than limit, please wait</string>
+    <string name="app_name">Aimd</string>
 </resources>
+

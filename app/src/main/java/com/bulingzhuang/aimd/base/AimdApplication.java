@@ -3,6 +3,8 @@ package com.bulingzhuang.aimd.base;
 import android.app.Application;
 import android.graphics.Typeface;
 
+import com.avos.avoscloud.AVOSCloud;
+
 /**
  * Created by bulingzhuang
  * on 2017/3/21
@@ -17,6 +19,10 @@ public class AimdApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // 初始化参数依次为 this, AppId, AppKey
+        AVOSCloud.initialize(this,"aA02xsOcM0CVLYl3JPuCR8vQ-gzGzoHsz","0zghOzYB21nFS1kMOkWYuQRw");
+
         sAimdApplication = (AimdApplication) getApplicationContext();
         mTypeface = Typeface.createFromAsset(sAimdApplication.getAssets(), "PingFangRegular.ttf");
     }

@@ -20,19 +20,19 @@
         app:srcCompat="@mipmap/icon_origin"/>
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:paddingLeft="3dp"
         android:text="( 未登录 )"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/tv_signature"
         android:paddingLeft="3dp"
-        android:paddingTop="3dp"
+        android:paddingTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"

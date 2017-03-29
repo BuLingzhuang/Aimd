@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,18 +21,26 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.bulingzhuang.aimd.utils.Tools;
 import com.bulingzhuang.aimd.view.activity.UserActivity;
 import com.bulingzhuang.aimd.view.adapter.AZPagerAdapter;
 import com.bulingzhuang.aimd.view.support.ScrollOffsetTransformer;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private RelativeLayout mMainActivity;
+    private TextView mTvNickname;
+    private ImageView mIvPortrait;
+    private TextView mTvSignature;
+    private TextView mTvToolbarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +69,54 @@ public class MainActivity extends AppCompatActivity
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            mTvToolbarLogin.setVisibility(View.GONE);
+            String portrait = (String) currentUser.get("portrait");
+            Tools.showLogE("头像地址：" + portrait);
+            if (!TextUtils.isEmpty(portrait)) {
+                Glide.with(this).load(portrait).crossFade().bitmapTransform(new CropCircleTransformation(this)).placeholder(R.mipmap.icon_origin).error(R.mipmap.icon_origin).into(mIvPortrait);
+            } else {
+                mIvPortrait.setImageResource(R.mipmap.icon_origin);
+            }
+            String nickname = (String) currentUser.get("nickname");
+            Tools.showLogE("昵称：" + nickname);
+            if (!TextUtils.isEmpty(nickname)) {
+                mTvNickname.setText(nickname);
+            } else {
+                mTvNickname.setText("null");
+            }
+            String signature = (String) currentUser.get("signature");
+            if (!TextUtils.isEmpty(signature)) {
+                mTvSignature.setText(signature);
+            }
+        } else {
+            mTvToolbarLogin.setVisibility(View.VISIBLE);
+            mTvNickname.setText("( 未登录 )");
+            mIvPortrait.setImageResource(R.mipmap.icon_origin);
+            mTvSignature.setText("点一下试试吧 ヾ(´･ω･｀)ﾉ");
+        }
+    }
+
     private void init() {
 
         //设置侧拉栏
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        ImageView ivPortrait = (ImageView) headerView.findViewById(R.id.iv_portrait);
-        TextView tvUsername = (TextView) headerView.findViewById(R.id.tv_username);
-        TextView tvSignature = (TextView) headerView.findViewById(R.id.tv_signature);
-        TextView tvToolbarLogin = (TextView) findViewById(R.id.btn_toolbarLogin);
+        mIvPortrait = (ImageView) headerView.findViewById(R.id.iv_portrait);
+        mTvNickname = (TextView) headerView.findViewById(R.id.tv_nickname);
+        mTvSignature = (TextView) headerView.findViewById(R.id.tv_signature);
+        mTvToolbarLogin = (TextView) findViewById(R.id.btn_toolbarLogin);
 
         mMainActivity = (RelativeLayout) findViewById(R.id.content_main);
 
-        Tools.changeFont(tvUsername,tvSignature,tvToolbarLogin);
-        setViewsOnClickListener(ivPortrait,tvUsername,tvSignature,tvToolbarLogin);
-        
+        Tools.changeFont(mTvNickname, mTvSignature, mTvToolbarLogin);
+        setViewsOnClickListener(mIvPortrait, mTvNickname, mTvSignature, mTvToolbarLogin);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_content);
         List<View> viewList = new ArrayList<>();
 
@@ -92,7 +133,7 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(new AZPagerAdapter(viewList));
     }
 
-    private void setViewsOnClickListener(View... views){
+    private void setViewsOnClickListener(View... views) {
         for (View view : views) {
             view.setOnClickListener(this);
         }
@@ -161,14 +202,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-                //头像、用户名、签名都跳转登录页面
-            // TODO: 2017/3/27 测试
+            //头像、用户名、签名都跳转登录页面
             case R.id.btn_toolbarLogin:
-                startActivity(new Intent(this,TestActivity.class));
-                break;
             case R.id.iv_portrait:
             case R.id.tv_signature:
-            case R.id.tv_username:
+            case R.id.tv_nickname:
                 startActivity(new Intent(this, UserActivity.class));
                 break;
         }

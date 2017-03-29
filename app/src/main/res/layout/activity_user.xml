@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.bulingzhuang.aimd.view.activity.UserActivity">
 
     <LinearLayout
@@ -28,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/user_portrait_bg"/>
+                app:srcCompat="@drawable/user_portrait_bg"/>
 
             <ImageView
                 android:id="@+id/iv_portrait_type_bg"
@@ -44,7 +45,7 @@
                 android:layout_height="26dp"
                 android:layout_centerInParent="true"
                 android:paddingBottom="3dp"
-                android:src="@drawable/ic_camera"/>
+                app:srcCompat="@drawable/ic_camera"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -65,9 +66,9 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="账号"
+                android:hint="邮箱"
                 android:inputType="textEmailAddress"
-                android:maxLength="20"
+                android:maxLength="30"
                 android:minHeight="32dp"
                 android:text=""
                 android:textColor="@color/colorPrimary"
@@ -137,7 +138,7 @@
                 android:gravity="center_vertical"
                 android:hint="邮箱(用于登录和找回密码)"
                 android:inputType="textEmailAddress"
-                android:maxLength="20"
+                android:maxLength="30"
                 android:minHeight="32dp"
                 android:text=""
                 android:textColor="@color/colorPrimary"
@@ -254,7 +255,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    app:srcCompat="@drawable/ic_camera_false"/>
             </RelativeLayout>
         </RelativeLayout>
 
@@ -291,8 +292,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@mipmap/weibo_sdk_logo"
-        tools:targetApi="lollipop"/>
+        android:src="@mipmap/weibo_sdk_logo"/>
 
     <LinearLayout
         android:id="@+id/ll_login_otherTitle"
@@ -338,8 +338,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back"
-            tools:targetApi="lollipop"/>
+            app:srcCompat="@drawable/ic_back"/>
     </RelativeLayout>
 </RelativeLayout>
 

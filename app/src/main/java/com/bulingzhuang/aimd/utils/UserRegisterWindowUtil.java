@@ -9,12 +9,9 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,7 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bulingzhuang.aimd.R;
-import com.bulingzhuang.aimd.TestActivity;
 
 /**
  * Created by bulingzhuang
@@ -41,7 +37,6 @@ public class UserRegisterWindowUtil {
     private View mLine_1;
     private View mLine_2;
     private ImageView mPencil;
-    private FloatingActionButton mFab;
     private PopupWindow mPopupWindow;
     private TextView mTvTips;
 
@@ -64,7 +59,6 @@ public class UserRegisterWindowUtil {
     private int lines;
     private float mScale = 0f;
     private boolean mIsSucceed;
-    private int num;
     private AnimatorSet mSet;
 
     public void setCurrentNumP(int currentNumP) {
@@ -180,7 +174,6 @@ public class UserRegisterWindowUtil {
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                     ++lines;
-                    Tools.showLogE("当前文字行数：" + lines);
                 }
             });
 
@@ -216,7 +209,6 @@ public class UserRegisterWindowUtil {
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                     ++pLines;
-                    Tools.showLogE("当前铅笔行数：" + pLines);
                 }
             });
 
@@ -229,7 +221,6 @@ public class UserRegisterWindowUtil {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    Tools.showLogE("最后结束了，mIsSucceed：" + mIsSucceed);
                     if (mIsSucceed) {
                         TransitionManager.beginDelayedTransition(mViewGroup, new Fade());
                         mTvTips.setText("注册成功");

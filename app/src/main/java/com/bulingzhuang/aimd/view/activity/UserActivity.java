@@ -31,6 +31,7 @@ import com.avos.avoscloud.SignUpCallback;
 import com.bulingzhuang.aimd.R;
 import com.bulingzhuang.aimd.utils.Constants;
 import com.bulingzhuang.aimd.utils.SelectPopUtil;
+import com.bulingzhuang.aimd.utils.SharePreferenceUtil;
 import com.bulingzhuang.aimd.utils.Tools;
 import com.bulingzhuang.aimd.utils.UserRegisterWindowUtil;
 import com.bumptech.glide.Glide;
@@ -136,7 +137,7 @@ public class UserActivity extends AppCompatActivity {
 
     private void init() {
         btnSubmit.setEnabled(false);
-        changePageType(true);
+        changePageType(SharePreferenceUtil.getBooleanDefaultTrue(this, Constants.USER_INIT_TYPE));
         initListeners();
     }
 
@@ -217,6 +218,7 @@ public class UserActivity extends AppCompatActivity {
                 @Override
                 public void end() {
                     if (mException == null) {//注册成功
+                        SharePreferenceUtil.setValue(UserActivity.this, Constants.USER_INIT_TYPE, false);
                         Tools.showSnackBarDark(UserActivity.this, "注册成功", activity);
                         checkCurrentStatus(false);
                     } else {//注册失败，根据code弹对应提示
@@ -242,6 +244,7 @@ public class UserActivity extends AppCompatActivity {
                 @Override
                 public void done(AVUser avUser, AVException e) {
                     if (e == null) {
+                        SharePreferenceUtil.setValue(UserActivity.this, Constants.USER_INIT_TYPE, false);
                         checkCurrentStatus(false);
                     } else {
                         Tools.leanCloudExceptionHadling(getApplicationContext(), e, activity);

@@ -10,6 +10,9 @@ public class Constants {
 
     public static boolean DEBUG = true;
 
+    public static final String AIMD_SHARED_PREFERENCES = "com.bulingzhuang.aimd.shared_preferences";
+    public static final String USER_INIT_TYPE = "com.bulingzhuang.aimd.user_init_type";
+
     public static final int IMAGE_REQUEST_CODE = 10004;// 相册
     public static final int CAMERA_REQUEST_CODE = 10001;// 相机
     public static final int RESULT_REQUEST_CODE = 10002;// 剪辑相片后结果

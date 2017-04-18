@@ -1,12 +1,17 @@
 package com.bulingzhuang.aimd.view.activity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -14,7 +19,9 @@ import android.text.TextWatcher;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +43,7 @@ import com.bulingzhuang.aimd.utils.Tools;
 import com.bulingzhuang.aimd.utils.UserRegisterWindowUtil;
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -46,10 +54,16 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class UserActivity extends AppCompatActivity {
 
+    @Bind(R.id.ll_content)
+    LinearLayout llContent;
+    @Bind(R.id.rl_portrait)
+    RelativeLayout rlPortrait;
     @Bind(R.id.civ_portrait)
     ImageView civPortrait;
     @Bind(R.id.iv_portrait_type_bg)
     ImageView ivPortraitTypeBg;
+    @Bind(R.id.tv_loading)
+    TextView tvLoading;
     @Bind(R.id.iv_portrait_type)
     ImageView ivPortraitType;
     @Bind(R.id.et_login_email)
@@ -86,6 +100,8 @@ public class UserActivity extends AppCompatActivity {
     TextView tvPageType;
     @Bind(R.id.btn_pageType)
     RelativeLayout btnPageType;
+    @Bind(R.id.ll_submit)
+    LinearLayout llSubmit;
     @Bind(R.id.tv_user_nickname)
     TextView tvUserNickname;
     @Bind(R.id.btn_tips)
@@ -107,6 +123,7 @@ public class UserActivity extends AppCompatActivity {
 
     private boolean mIsRegister;//页面状态值(true注册/false登录)
     private boolean mHasUser;
+    private boolean mIsInitial;
 
     private int mLoginEmailLength;//登录邮箱长度
     private int mLoginPasswordLength;//登录密码长度
@@ -136,6 +153,11 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void init() {
+        mIsInitial = true;
+        civPortrait.setFocusable(true);
+        civPortrait.setFocusableInTouchMode(true);
+        civPortrait.requestFocus();
+        civPortrait.requestFocusFromTouch();
         btnSubmit.setEnabled(false);
         changePageType(SharePreferenceUtil.getBooleanDefaultTrue(this, Constants.USER_INIT_TYPE));
         initListeners();
@@ -191,26 +213,26 @@ public class UserActivity extends AppCompatActivity {
         if (mIsRegister) {//注册
             String nickname = etRegisterNickname.getText().toString().trim();
             if (TextUtils.isEmpty(nickname)) {
-                Tools.showSnackBarDark(this, "昵称为空", activity);
+                showError("昵称为空");
                 return;
             }
             String email = etRegisterEmail.getText().toString().trim();
             if (TextUtils.isEmpty(email)) {
-                Tools.showSnackBarDark(this, "账号(邮箱)为空", activity);
+                showError("账号(邮箱)为空");
                 return;
             }
             String password = etRegisterPassword.getText().toString().trim();
             if (TextUtils.isEmpty(password)) {
-                Tools.showSnackBarDark(this, "密码为空", activity);
+                showError("密码为空");
                 return;
             }
             String checkPassword = etRegisterCheckPassword.getText().toString().trim();
             if (TextUtils.isEmpty(checkPassword)) {
-                Tools.showSnackBarDark(this, "确认密码为空", activity);
+                showError("确认密码为空");
                 return;
             }
             if (!password.equals(checkPassword)) {
-                Tools.showSnackBarDark(this, "两次密码不一致", activity);
+                showError("两次密码不一致");
                 return;
             }
             mRegisterPopupwindow = new UserRegisterWindowUtil(this, activity);
@@ -232,11 +254,13 @@ public class UserActivity extends AppCompatActivity {
             avUser.setPassword(password);
             avUser.put("nickname", nickname);
             avUser.put("portrait", mNetImageUri);
+
+            hideSoftInput();
             avUser.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(AVException e) {
                     mException = e;
-                    mRegisterPopupwindow.finishPopupWindow();
+                    mRegisterPopupwindow.finishPopupWindow(mException);
                 }
             });
         } else {//登录
@@ -264,7 +288,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void send(String flag) {
                 if (flag.equals("0")) { //拍照
-                    /** 打开相机拍照 */
+                    /* 打开相机拍照 */
                     mUploadImageUri = Uri.fromFile(new File(getApplicationContext().getFilesDir(), "Aimd_" + System.currentTimeMillis() + ".jpg"));
                     Intent intent = new Intent(
                             MediaStore.ACTION_IMAGE_CAPTURE);
@@ -272,7 +296,7 @@ public class UserActivity extends AppCompatActivity {
                     startActivityForResult(intent, Constants.CAMERA_REQUEST_CODE);
                 }
                 if (flag.equals("1")) { //本地
-                    /** 打开相册选择图片 */
+                    /* 打开相册选择图片 */
                     startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), Constants.IMAGE_REQUEST_CODE);
                 }
             }
@@ -288,12 +312,12 @@ public class UserActivity extends AppCompatActivity {
             Tools.showLogE("requestCode：" + requestCode + "，resultCode：" + resultCode);
             switch (requestCode) {
                 case Constants.IMAGE_REQUEST_CODE:
-                    /** 相册里的相片 */
+                    /* 相册里的相片 */
                     startPhotoZoom(data.getData());
                     break;
 
                 case Constants.CAMERA_REQUEST_CODE:
-                    /** 相机拍摄的相片 */
+                    /* 相机拍摄的相片 */
                     if (Tools.hasSdcard()) {
                         startPhotoZoom(mUploadImageUri);
                     } else {
@@ -301,7 +325,7 @@ public class UserActivity extends AppCompatActivity {
                     }
                     break;
                 case Constants.RESULT_REQUEST_CODE:
-                    /** 保存并设置头像 */
+                    /* 保存并设置头像 */
                     if (data != null) {
                         saveClippedImage(data);
                     }
@@ -341,10 +365,9 @@ public class UserActivity extends AppCompatActivity {
 
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-            ivPortraitType.setVisibility(View.INVISIBLE);
             String imagePath = Tools.saveBitmap(photo, this.getFilesDir() + "clippedImage.jpeg");
             if (!TextUtils.isEmpty(imagePath)) {
-                uploadIcon(imagePath);
+                uploadIcon(imagePath, photo);
             } else {
                 Tools.showSnackBarDark(this, "保存剪裁图片失败", activity);
             }
@@ -356,27 +379,33 @@ public class UserActivity extends AppCompatActivity {
      *
      * @param filePath
      */
-    private void uploadIcon(String filePath) {
+    private void uploadIcon(String filePath, Bitmap bitmap) {
         if (filePath != null) {
             int lastIndexOf = filePath.lastIndexOf(".");
             if (lastIndexOf > 0) {
                 String suffix = filePath.substring(lastIndexOf, filePath.length());
                 try {
+                    ivPortraitType.setVisibility(View.INVISIBLE);
+                    tvLoading.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    final byte[] bitmapBytes = stream.toByteArray();
                     final AVFile avFile = AVFile.withAbsoluteLocalPath("ICON_" + Tools.getAndroidIMEI(this) + suffix, filePath);
                     avFile.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(AVException e) {
-                            ivPortraitType.setVisibility(View.VISIBLE);
                             if (e == null && !TextUtils.isEmpty(avFile.getUrl())) {
                                 ivPortraitType.setImageResource(R.drawable.ic_camera_true);
                                 mNetImageUri = avFile.getUrl();
                                 LogUtil.log.e("图片地址：" + mNetImageUri);
-                                Glide.with(UserActivity.this).load(mNetImageUri).error(R.mipmap.icon_origin).bitmapTransform(new CropCircleTransformation(UserActivity.this))
+                                Glide.with(UserActivity.this).load(bitmapBytes).error(R.mipmap.icon_origin).bitmapTransform(new CropCircleTransformation(UserActivity.this))
                                         .placeholder(R.mipmap.icon_origin).crossFade().into(civPortrait);
                             } else {
                                 ivPortraitType.setImageResource(R.drawable.ic_camera_false);
                                 Tools.showSnackBarDark(UserActivity.this, "头像上传失败", activity);
                             }
+                            tvLoading.setVisibility(View.INVISIBLE);
+                            ivPortraitType.setVisibility(View.VISIBLE);
                         }
                     });
                 } catch (FileNotFoundException e) {
@@ -427,6 +456,26 @@ public class UserActivity extends AppCompatActivity {
         }
     }
 
+    private void showError(String str) {
+        Tools.showSnackBarDark(this, str, activity, Snackbar.LENGTH_LONG);
+        hideSoftInput();
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    private void hideSoftInput() {
+        View currentFocus = getCurrentFocus();
+        if (currentFocus != null) {
+            IBinder token = currentFocus.getWindowToken();
+            if (token != null) {
+                InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                im.hideSoftInputFromWindow(token,
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+
     /**
      * 改变页面类型(true注册/false登录)
      *
@@ -440,7 +489,11 @@ public class UserActivity extends AppCompatActivity {
         etRegisterEmail.setText("");
         etRegisterPassword.setText("");
         etRegisterCheckPassword.setText("");
+        int margin = Tools.dp2px(this, 16);
         if (mIsRegister = isRegister) {//注册页面
+            if (!mIsInitial) {
+                ObjectAnimator.ofFloat(llSubmit, "translationY", -(3 * margin), -(1.5f * margin)).setDuration(233).start();
+            }
             ivPortraitType.setVisibility(View.VISIBLE);
             ivPortraitTypeBg.setVisibility(View.GONE);
             btnSubmit.setText("注册");
@@ -448,6 +501,9 @@ public class UserActivity extends AppCompatActivity {
             llLogin.setVisibility(View.GONE);
             tvPageType.setText(getResources().getString(R.string.user_page_type_register));
         } else {//登录页面
+            if (!mIsInitial) {
+                ObjectAnimator.ofFloat(llSubmit, "translationY", -(1.5f * margin), -(3 * margin)).setDuration(233).start();
+            }
             ivPortraitType.setVisibility(View.GONE);
             ivPortraitTypeBg.setVisibility(View.VISIBLE);
             btnSubmit.setText("登录");
@@ -495,6 +551,57 @@ public class UserActivity extends AppCompatActivity {
         etRegisterEmail.addTextChangedListener(myTextWatcher);
         etRegisterCheckPassword.addTextChangedListener(myTextWatcher);
         etRegisterPassword.addTextChangedListener(myTextWatcher);
+
+        View.OnTouchListener touchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_UP:
+                        if (mIsInitial) {
+                            Tools.showLogE("开始上移动化");
+                            startMoveAnim();
+                        }
+                        break;
+                }
+                return false;
+            }
+        };
+        etLoginEmail.setOnTouchListener(touchListener);
+        etLoginPassword.setOnTouchListener(touchListener);
+        etRegisterNickname.setOnTouchListener(touchListener);
+        etRegisterEmail.setOnTouchListener(touchListener);
+        etRegisterPassword.setOnTouchListener(touchListener);
+        etRegisterCheckPassword.setOnTouchListener(touchListener);
+    }
+
+    /**
+     * 移动动画
+     */
+    private void startMoveAnim() {
+        int[] rlPortraitScreen = new int[2];
+        rlPortrait.getLocationOnScreen(rlPortraitScreen);
+//        Tools.showLogE("x="+rlPortraitScreen[0]+",y="+rlPortraitScreen[1]);
+        int margin = Tools.dp2px(this, 16);
+        int rightValue = rlPortraitScreen[0] - margin * 3 / 4;
+        int topValue = rlPortraitScreen[1] - margin;
+        ObjectAnimator aPortraitTranslationX = ObjectAnimator.ofFloat(rlPortrait, "translationX", 0f, rightValue).setDuration(233);
+        ObjectAnimator aPortraitScaleX = ObjectAnimator.ofFloat(rlPortrait, "scaleX", 1f, 0.666f).setDuration(233);
+        ObjectAnimator aPortraitScaleY = ObjectAnimator.ofFloat(rlPortrait, "scaleY", 1f, 0.666f).setDuration(233);
+        ObjectAnimator aContentTranslationY = ObjectAnimator.ofFloat(llContent, "translationY", 0f, -topValue).setDuration(233);
+        ObjectAnimator aEditTextTranslationY;
+        ObjectAnimator aSubmitTranslationY;
+        if (mIsRegister) {
+            aEditTextTranslationY = ObjectAnimator.ofFloat(llRegister, "translationY", 0f, -margin).setDuration(233);
+            aSubmitTranslationY = ObjectAnimator.ofFloat(llSubmit, "translationY", 0f, -(1.5f * margin)).setDuration(233);
+        } else {
+            aEditTextTranslationY = ObjectAnimator.ofFloat(llLogin, "translationY", 0f, -margin).setDuration(233);
+            aSubmitTranslationY = ObjectAnimator.ofFloat(llSubmit, "translationY", 0f, -(3 * margin)).setDuration(233);
+        }
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(aPortraitTranslationX, aPortraitScaleX, aPortraitScaleY, aContentTranslationY, aEditTextTranslationY, aSubmitTranslationY);
+        animatorSet.start();
+        mIsInitial = false;
     }
 
 

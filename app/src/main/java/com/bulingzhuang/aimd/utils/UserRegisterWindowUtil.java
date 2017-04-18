@@ -23,6 +23,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
 import com.bulingzhuang.aimd.R;
 
 /**
@@ -43,6 +44,7 @@ public class UserRegisterWindowUtil {
     private Context mContext;
     private ViewGroup mViewGroup;
     private AnimEndListener mListener;
+    private String mTips = "注册成功";
 
     public interface AnimEndListener {
         void end();
@@ -74,8 +76,13 @@ public class UserRegisterWindowUtil {
         showPopupWindow();
     }
 
-    public void finishPopupWindow(){
+    public void finishPopupWindow(AVException e){
         mIsSucceed = true;
+        if (e == null) {
+            mTips = "注册成功";
+        }else {
+            mTips = "注册失败";
+        }
     }
 
     /**
@@ -223,7 +230,7 @@ public class UserRegisterWindowUtil {
                 public void onAnimationEnd(Animator animation) {
                     if (mIsSucceed) {
                         TransitionManager.beginDelayedTransition(mViewGroup, new Fade());
-                        mTvTips.setText("注册成功");
+                        mTvTips.setText(mTips);
                         mPencil.setVisibility(View.GONE);
                         new Thread(new Runnable() {
                             @Override

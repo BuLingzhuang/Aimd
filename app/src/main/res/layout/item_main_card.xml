@@ -8,19 +8,98 @@
               android:paddingLeft="36dp"
               android:paddingRight="56dp"
               android:paddingTop="16dp">
-        <android.support.v7.widget.CardView
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="cv_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="6dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@android:color/white"
-            app:cardElevation="3dp">
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:text="Page_0"/>
-        </android.support.v7.widget.CardView>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_text"
+                        android:text="Aa"
+                        android:transitionName="iv_text"
+                        android:textColor="@color/colorPrimaryLight"
+                        android:textSize="42sp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/iv_map"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:transitionName="iv_map"
+                        app:srcCompat="@drawable/ic_location"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingRight="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_sound"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:transitionName="iv_sound"
+                        app:srcCompat="@drawable/ic_mic"/>
+
+                    <ImageView
+                        android:id="@+id/iv_image"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:transitionName="iv_image"
+                        app:srcCompat="@drawable/ic_image"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_add_double"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:transitionName="btn_add_finish"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="33dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/ic_main_add_circle"/>
+
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:transitionName="btn_add_del"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="33dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/ic_main_add_circle"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

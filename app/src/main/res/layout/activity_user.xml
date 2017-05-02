@@ -285,7 +285,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:padding="12dp"
-            android:text="    由于作者是个穷B，暂时不提供付费的短信验证相关功能，所以请妥善保管您的账号，丢失不补。(再注册一个就好了，目前这个登录也没啥用...后续看心情可能会有更新迭代，有意见建议可微博私信/发邮件联系，地址在主页右上角关于里)"
+            android:text="    由于作者是个穷B，暂时不提供付费的短信验证相关功能，所以请妥善保管您的账号，丢失不补。(再注册一个就好了，目前这个登录也没啥用...后续看心情可能会有更新迭代，有意见建议可微博私信（卜令壮_hhy）/发邮件联系（bulingzhuang@foxmail.com），地址在主页右上角关于里)"
             android:textColor="@color/colorAccent"
             android:textSize="14sp"
             android:visibility="gone"/>

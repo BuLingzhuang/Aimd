@@ -32,6 +32,15 @@
         </activity>
         <activity android:name=".view.activity.EditorActivity">
         </activity>
+        <activity
+            android:name=".view.activity.ModuleTypeTestActivity"
+            android:label="@string/title_activity_module_type"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".view.activity.ModuleTypeActivity">
+        </activity>
+        <activity android:name=".view.activity.ModuleTextActivity">
+        </activity>
     </application>
 
 </manifest>

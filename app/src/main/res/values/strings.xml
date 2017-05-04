@@ -44,5 +44,6 @@
     <string name="e_code_211">Could not find user</string>
     <string name="e_code_219">Login failed more than limit, please wait</string>
     <string name="app_name">Aimd</string>
+    <string name="title_activity_module_type"></string>
 </resources>
 

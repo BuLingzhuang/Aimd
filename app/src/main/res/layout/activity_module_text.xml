@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.bulingzhuang.aimd.view.activity.ModuleTextActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="vertical"
+        android:translationZ="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:translationZ="4dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                app:srcCompat="@drawable/ic_module_indicator_s"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="28dp"
+                android:text="填写"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="80dp"
+            android:translationZ="3dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+
+                app:srcCompat="@drawable/ic_module_indicator_s"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="36dp"
+                android:text="编辑"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="160dp"
+            android:translationZ="2dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                app:srcCompat="@drawable/ic_module_indicator_f"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="36dp"
+                android:text="预览"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="2dp"
+            android:transitionName="btn_add_del"
+            app:srcCompat="@drawable/ic_editor_del"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/line_module"
+        android:translationZ="1dp"/>
+</RelativeLayout>

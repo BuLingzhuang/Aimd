@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -18,7 +17,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.transition.Fade;
 import android.transition.TransitionManager;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -160,7 +158,7 @@ public class UserActivity extends AppCompatActivity {
         civPortrait.requestFocusFromTouch();
         btnSubmit.setEnabled(false);
         changePageType(SharePreferenceUtil.getBooleanDefaultTrue(this, Constants.USER_INIT_TYPE));
-        initListeners();
+        initListeners(etLoginEmail,etLoginPassword,etRegisterNickname,etRegisterEmail,etRegisterPassword,etRegisterCheckPassword);
     }
 
     private void initData() {
@@ -236,18 +234,15 @@ public class UserActivity extends AppCompatActivity {
                 return;
             }
             mRegisterPopupwindow = new UserRegisterWindowUtil(this, activity);
-            mRegisterPopupwindow.execute(new UserRegisterWindowUtil.AnimEndListener() {
-                @Override
-                public void end() {
-                    if (mException == null) {//注册成功
-                        SharePreferenceUtil.setValue(UserActivity.this, Constants.USER_INIT_TYPE, false);
-                        Tools.showSnackBarDark(UserActivity.this, "注册成功", activity);
-                        checkCurrentStatus(false);
-                    } else {//注册失败，根据code弹对应提示
-                        Tools.leanCloudExceptionHadling(UserActivity.this, mException, activity);
-                    }
-                    mException = null;
+            mRegisterPopupwindow.execute(() -> {
+                if (mException == null) {//注册成功
+                    SharePreferenceUtil.setValue(UserActivity.this, Constants.USER_INIT_TYPE, false);
+                    Tools.showSnackBarDark(UserActivity.this, "注册成功", activity);
+                    checkCurrentStatus(false);
+                } else {//注册失败，根据code弹对应提示
+                    Tools.leanCloudExceptionHadling(UserActivity.this, mException, activity);
                 }
+                mException = null;
             });
             AVUser avUser = new AVUser();
             avUser.setUsername(email);
@@ -264,6 +259,7 @@ public class UserActivity extends AppCompatActivity {
                 }
             });
         } else {//登录
+            hideSoftInput();
             AVUser.logInInBackground(etLoginEmail.getText().toString(), etLoginPassword.getText().toString(), new LogInCallback<AVUser>() {
                 @Override
                 public void done(AVUser avUser, AVException e) {
@@ -284,21 +280,18 @@ public class UserActivity extends AppCompatActivity {
     private void chooseUserIcon() {
         SelectPopUtil popWindow = new SelectPopUtil(this);
         popWindow.showPopupWindow("拍照", "相册选择");
-        popWindow.setListener(new SelectPopUtil.SelectPopListener() {
-            @Override
-            public void send(String flag) {
-                if (flag.equals("0")) { //拍照
-                    /* 打开相机拍照 */
-                    mUploadImageUri = Uri.fromFile(new File(getApplicationContext().getFilesDir(), "Aimd_" + System.currentTimeMillis() + ".jpg"));
-                    Intent intent = new Intent(
-                            MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mUploadImageUri);
-                    startActivityForResult(intent, Constants.CAMERA_REQUEST_CODE);
-                }
-                if (flag.equals("1")) { //本地
-                    /* 打开相册选择图片 */
-                    startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), Constants.IMAGE_REQUEST_CODE);
-                }
+        popWindow.setListener(flag -> {
+            if (flag.equals("0")) { //拍照
+                /* 打开相机拍照 */
+                mUploadImageUri = Uri.fromFile(new File(getApplicationContext().getFilesDir(), "Aimd_" + System.currentTimeMillis() + ".jpg"));
+                Intent intent = new Intent(
+                        MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, mUploadImageUri);
+                startActivityForResult(intent, Constants.CAMERA_REQUEST_CODE);
+            }
+            if (flag.equals("1")) { //本地
+                /* 打开相册选择图片 */
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), Constants.IMAGE_REQUEST_CODE);
             }
         });
 
@@ -395,13 +388,13 @@ public class UserActivity extends AppCompatActivity {
                         @Override
                         public void done(AVException e) {
                             if (e == null && !TextUtils.isEmpty(avFile.getUrl())) {
-                                ivPortraitType.setImageResource(R.drawable.ic_camera_true);
+                                ivPortraitType.setImageResource(R.drawable.ic_portrait_true);
                                 mNetImageUri = avFile.getUrl();
                                 LogUtil.log.e("图片地址：" + mNetImageUri);
                                 Glide.with(UserActivity.this).load(bitmapBytes).error(R.mipmap.icon_origin).bitmapTransform(new CropCircleTransformation(UserActivity.this))
                                         .placeholder(R.mipmap.icon_origin).crossFade().into(civPortrait);
                             } else {
-                                ivPortraitType.setImageResource(R.drawable.ic_camera_false);
+                                ivPortraitType.setImageResource(R.drawable.ic_portrait_false);
                                 Tools.showSnackBarDark(UserActivity.this, "头像上传失败", activity);
                             }
                             tvLoading.setVisibility(View.INVISIBLE);
@@ -536,43 +529,15 @@ public class UserActivity extends AppCompatActivity {
     /**
      * 初始化各种监听器
      */
-    private void initListeners() {
+    private void initListeners(EditText... views) {
         MyFocusChangeListener myFocusChangeListener = new MyFocusChangeListener();
-        etLoginEmail.setOnFocusChangeListener(myFocusChangeListener);
-        etLoginPassword.setOnFocusChangeListener(myFocusChangeListener);
-        etRegisterNickname.setOnFocusChangeListener(myFocusChangeListener);
-        etRegisterEmail.setOnFocusChangeListener(myFocusChangeListener);
-        etRegisterCheckPassword.setOnFocusChangeListener(myFocusChangeListener);
-        etRegisterPassword.setOnFocusChangeListener(myFocusChangeListener);
         MyTextWatcher myTextWatcher = new MyTextWatcher();
-        etLoginEmail.addTextChangedListener(myTextWatcher);
-        etLoginPassword.addTextChangedListener(myTextWatcher);
-        etRegisterNickname.addTextChangedListener(myTextWatcher);
-        etRegisterEmail.addTextChangedListener(myTextWatcher);
-        etRegisterCheckPassword.addTextChangedListener(myTextWatcher);
-        etRegisterPassword.addTextChangedListener(myTextWatcher);
-
-        View.OnTouchListener touchListener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_UP:
-                        if (mIsInitial) {
-                            Tools.showLogE("开始上移动化");
-                            startMoveAnim();
-                        }
-                        break;
-                }
-                return false;
-            }
-        };
-        etLoginEmail.setOnTouchListener(touchListener);
-        etLoginPassword.setOnTouchListener(touchListener);
-        etRegisterNickname.setOnTouchListener(touchListener);
-        etRegisterEmail.setOnTouchListener(touchListener);
-        etRegisterPassword.setOnTouchListener(touchListener);
-        etRegisterCheckPassword.setOnTouchListener(touchListener);
+        MyTouchListener myTouchListener = new MyTouchListener();
+        for (EditText view : views) {
+            view.setOnFocusChangeListener(myFocusChangeListener);
+            view.addTextChangedListener(myTextWatcher);
+            view.setOnTouchListener(myTouchListener);
+        }
     }
 
     /**
@@ -680,7 +645,27 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
             checkCanSubmit();
+        }
+    }
 
+    /**
+     * 触摸监听
+     */
+    private class MyTouchListener implements View.OnTouchListener{
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            int action = event.getAction();
+            switch (action) {
+                case MotionEvent.ACTION_UP:
+                    if (mIsInitial) {
+                        Tools.showLogE("开始上移动化");
+                        startMoveAnim();
+                    }
+                    break;
+            }
+            return false;
         }
     }
 }

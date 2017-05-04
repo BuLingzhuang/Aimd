@@ -59,13 +59,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,21 +132,18 @@ public class MainActivity extends AppCompatActivity
             ImageView btnAdd = (ImageView) inflate.findViewById(R.id.iv_add);
             final ImageView btnAddD = (ImageView) inflate.findViewById(R.id.iv_add_double);
             TransitionManager.beginDelayedTransition(inflate, new Fade());
-            btnAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
-                            new Pair<View, String>(cv, "cv_content"),
-                            new Pair<View, String>(ivText, "iv_text"),
-                            new Pair<View, String>(ivMap, "iv_map"),
-                            new Pair<View, String>(ivSound, "iv_sound"),
-                            new Pair<View, String>(ivImage, "iv_image"),
-                            new Pair<View, String>(btnAddD, "btn_add_finish"),
-                            new Pair<>(v, "btn_add_del")
-                            ).toBundle();
-                    startActivity(intent,bundle);
-                }
+            btnAdd.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                        new Pair<>(cv, "cv_content"),
+                        new Pair<>(ivText, "iv_text"),
+                        new Pair<>(ivMap, "iv_map"),
+                        new Pair<>(ivSound, "iv_sound"),
+                        new Pair<>(ivImage, "iv_image"),
+                        new Pair<>(btnAddD, "btn_add_finish"),
+                        new Pair<>(v, "btn_add_del")
+                ).toBundle();
+                startActivity(intent, bundle);
             });
             viewList.add(inflate);
         }

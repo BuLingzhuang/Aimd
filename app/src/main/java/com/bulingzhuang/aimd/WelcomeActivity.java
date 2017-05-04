@@ -11,21 +11,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    @Bind(R.id.iv_bg_0)
-    ImageView ivBg0;
-    @Bind(R.id.iv_t)
-    ImageView ivT;
-    @Bind(R.id.activity_welcome)
-    RelativeLayout activityWelcome;
-    private int counter;
+    private ImageView mIvT;
+    private ImageView mIvBg0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +24,16 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
-        ButterKnife.bind(this);
+        mIvBg0 = (ImageView) findViewById(R.id.iv_bg_0);
+        mIvT = (ImageView) findViewById(R.id.iv_t);
         startAnim();
     }
 
     private void startAnim() {
-        ImageView ivT = (ImageView) findViewById(R.id.iv_t);
-        ((Animatable) ivT.getDrawable()).start();
-        ivT.setVisibility(View.VISIBLE);
+        ((Animatable) mIvT.getDrawable()).start();
+        mIvT.setVisibility(View.VISIBLE);
         ObjectAnimator objectAnimator = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.bg_anim);
-        objectAnimator.setTarget(ivBg0);
+        objectAnimator.setTarget(mIvBg0);
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -66,6 +57,6 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
         objectAnimator.start();
-        ivBg0.setVisibility(View.VISIBLE);
+        mIvBg0.setVisibility(View.VISIBLE);
     }
 }

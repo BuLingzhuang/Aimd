@@ -7,6 +7,12 @@ package com.bulingzhuang.aimd.entity;
  */
 
 public class ModuleTextEntity {
+
+    public static final int Alignment_l = 1, Alignment_c = 2, Alignment_r = 3;//对齐方式
+    public static final float LineSpacing_1 = 1.0f, LineSpacing_2 = 1.3f, LineSpacing_3 = 1.6f;//行间距
+    public static final int Typeface_1 = 1, Typeface_2 = 2, Typeface_3 = 3, Typeface_4 = 4, Typeface_5 = 5,
+            Typeface_6 = 6, Typeface_7 = 7, Typeface_8 = 8, Typeface_9 = 9;//字体格式
+
     private String content;//内容
     private int alignment;//对齐方式 1.左对齐 2.居中 3.右对齐
     private int textSize;//文字大小

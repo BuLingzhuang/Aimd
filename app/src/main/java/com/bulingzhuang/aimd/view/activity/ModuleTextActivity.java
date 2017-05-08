@@ -141,10 +141,6 @@ public class ModuleTextActivity extends AppCompatActivity {
     private ModuleTextEntity mModuleTextEntity;//数据实体类
 
     private final int mStep_1 = 1, mStep_2 = 2, mStep_3 = 3;//页面状态，1、2、3
-    private final int mAlignment_l = 1, mAlignment_c = 2, mAlignment_r = 3;//对齐方式
-    private final float mLineSpacing_1 = 1.0f, mLineSpacing_2 = 1.3f, mLineSpacing_3 = 1.6f;//行间距
-    private final int mTypeface_1 = 1, mTypeface_2 = 2, mTypeface_3 = 3, mTypeface_4 = 4, mTypeface_5 = 5,
-            mTypeface_6 = 6, mTypeface_7 = 7, mTypeface_8 = 8, mTypeface_9 = 9;//字体格式
     private SparseArray<Typeface> mTypefaceArray;//字体格式列表
 
     @Override
@@ -164,7 +160,7 @@ public class ModuleTextActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mModuleTextEntity = new ModuleTextEntity("", mAlignment_l, 14, mLineSpacing_1, mTypeface_1);
+        mModuleTextEntity = new ModuleTextEntity("", ModuleTextEntity.Alignment_l, 14, ModuleTextEntity.LineSpacing_1, ModuleTextEntity.Typeface_1);
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -230,52 +226,52 @@ public class ModuleTextActivity extends AppCompatActivity {
                 changeStep(mCurrentStep + 1);
                 break;
             case R.id.rl_step_2_alignment_l://对齐方式选择左对齐
-                changeTextAlignment(mAlignment_l);
+                changeTextAlignment(ModuleTextEntity.Alignment_l);
                 break;
             case R.id.rl_step_2_alignment_c://对齐方式选择居中
-                changeTextAlignment(mAlignment_c);
+                changeTextAlignment(ModuleTextEntity.Alignment_c);
                 break;
             case R.id.rl_step_2_alignment_r://对齐方式选择右对齐
-                changeTextAlignment(mAlignment_r);
+                changeTextAlignment(ModuleTextEntity.Alignment_r);
                 break;
             case R.id.iv_step_2_alignment_tips://显示提示内容
                 showStep2Tips();
                 break;
             case R.id.tv_step_2_spacing_1://行间距 x1
-                changeLineSpacing(mLineSpacing_1);
+                changeLineSpacing(ModuleTextEntity.LineSpacing_1);
                 break;
             case R.id.tv_step_2_spacing_2://行间距 x2
-                changeLineSpacing(mLineSpacing_2);
+                changeLineSpacing(ModuleTextEntity.LineSpacing_2);
                 break;
             case R.id.tv_step_2_spacing_3://行间距 x3
-                changeLineSpacing(mLineSpacing_3);
+                changeLineSpacing(ModuleTextEntity.LineSpacing_3);
                 break;
             case R.id.tv_step_2_typeface_1://选择字体1
-                changeTextTypeface(mTypeface_1);
+                changeTextTypeface(ModuleTextEntity.Typeface_1);
                 break;
             case R.id.tv_step_2_typeface_2://选择字体2
-                changeTextTypeface(mTypeface_2);
+                changeTextTypeface(ModuleTextEntity.Typeface_2);
                 break;
             case R.id.tv_step_2_typeface_3://选择字体3
-                changeTextTypeface(mTypeface_3);
+                changeTextTypeface(ModuleTextEntity.Typeface_3);
                 break;
             case R.id.tv_step_2_typeface_4://选择字体4
-                changeTextTypeface(mTypeface_4);
+                changeTextTypeface(ModuleTextEntity.Typeface_4);
                 break;
             case R.id.tv_step_2_typeface_5://选择字体5
-                changeTextTypeface(mTypeface_5);
+                changeTextTypeface(ModuleTextEntity.Typeface_5);
                 break;
             case R.id.tv_step_2_typeface_6://选择字体6
-                changeTextTypeface(mTypeface_6);
+                changeTextTypeface(ModuleTextEntity.Typeface_6);
                 break;
             case R.id.tv_step_2_typeface_7://选择字体7
-                changeTextTypeface(mTypeface_7);
+                changeTextTypeface(ModuleTextEntity.Typeface_7);
                 break;
             case R.id.tv_step_2_typeface_8://选择字体8
-                changeTextTypeface(mTypeface_8);
+                changeTextTypeface(ModuleTextEntity.Typeface_8);
                 break;
             case R.id.tv_step_2_typeface_9://选择字体9
-                changeTextTypeface(mTypeface_9);
+                changeTextTypeface(ModuleTextEntity.Typeface_9);
                 break;
             case R.id.btn_step_2_last://第二步到第一步
                 changeStep(mCurrentStep - 1);
@@ -306,21 +302,21 @@ public class ModuleTextActivity extends AppCompatActivity {
         tvStep2TypefaceExample.setLineSpacing(0, lineSpacing);
         etContent.setLineSpacing(0, lineSpacing);
         tvStep3Preview.setLineSpacing(0, lineSpacing);
-        if (lineSpacing == mLineSpacing_1) {
+        if (lineSpacing == ModuleTextEntity.LineSpacing_1) {
             tvStep2Spacing1.setTextColor(ContextCompat.getColor(this, android.R.color.white));
             tvStep2Spacing1.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
             tvStep2Spacing2.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             tvStep2Spacing2.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
             tvStep2Spacing3.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             tvStep2Spacing3.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
-        } else if (lineSpacing == mLineSpacing_2) {
+        } else if (lineSpacing == ModuleTextEntity.LineSpacing_2) {
             tvStep2Spacing1.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             tvStep2Spacing1.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
             tvStep2Spacing2.setTextColor(ContextCompat.getColor(this, android.R.color.white));
             tvStep2Spacing2.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
             tvStep2Spacing3.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             tvStep2Spacing3.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
-        } else if (lineSpacing == mLineSpacing_3) {
+        } else if (lineSpacing == ModuleTextEntity.LineSpacing_3) {
             tvStep2Spacing1.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             tvStep2Spacing1.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
             tvStep2Spacing2.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -351,15 +347,15 @@ public class ModuleTextActivity extends AppCompatActivity {
      * 初始化第二步九种字体格式
      */
     private void initTypeface() {
-        tvStep2Typeface1.setTypeface(mTypefaceArray.get(mTypeface_1, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface2.setTypeface(mTypefaceArray.get(mTypeface_2, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface3.setTypeface(mTypefaceArray.get(mTypeface_3, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface4.setTypeface(mTypefaceArray.get(mTypeface_4, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface5.setTypeface(mTypefaceArray.get(mTypeface_5, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface6.setTypeface(mTypefaceArray.get(mTypeface_6, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface7.setTypeface(mTypefaceArray.get(mTypeface_7, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface8.setTypeface(mTypefaceArray.get(mTypeface_8, AimdApplication.getInstance().getCustomTypeface()));
-        tvStep2Typeface9.setTypeface(mTypefaceArray.get(mTypeface_9, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface1.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_1, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface2.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_2, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface3.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_3, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface4.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_4, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface5.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_5, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface6.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_6, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface7.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_7, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface8.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_8, AimdApplication.getInstance().getCustomTypeface()));
+        tvStep2Typeface9.setTypeface(mTypefaceArray.get(ModuleTextEntity.Typeface_9, AimdApplication.getInstance().getCustomTypeface()));
     }
 
     /**
@@ -384,7 +380,7 @@ public class ModuleTextActivity extends AppCompatActivity {
      */
     private void changeTextTypefaceBTN(int typeface, boolean isCurrent) {
         switch (typeface) {
-            case mTypeface_1:
+            case ModuleTextEntity.Typeface_1:
                 if (isCurrent) {
                     tvStep2Typeface1.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface1.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -393,7 +389,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface1.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_2:
+            case ModuleTextEntity.Typeface_2:
                 if (isCurrent) {
                     tvStep2Typeface2.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface2.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -402,7 +398,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface2.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_3:
+            case ModuleTextEntity.Typeface_3:
                 if (isCurrent) {
                     tvStep2Typeface3.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface3.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -411,7 +407,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface3.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_4:
+            case ModuleTextEntity.Typeface_4:
                 if (isCurrent) {
                     tvStep2Typeface4.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface4.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -420,7 +416,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface4.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_5:
+            case ModuleTextEntity.Typeface_5:
                 if (isCurrent) {
                     tvStep2Typeface5.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface5.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -429,7 +425,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface5.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_6:
+            case ModuleTextEntity.Typeface_6:
                 if (isCurrent) {
                     tvStep2Typeface6.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface6.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -438,7 +434,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface6.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_7:
+            case ModuleTextEntity.Typeface_7:
                 if (isCurrent) {
                     tvStep2Typeface7.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface7.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -447,7 +443,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface7.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_8:
+            case ModuleTextEntity.Typeface_8:
                 if (isCurrent) {
                     tvStep2Typeface8.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface8.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -456,7 +452,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                     tvStep2Typeface8.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 }
                 break;
-            case mTypeface_9:
+            case ModuleTextEntity.Typeface_9:
                 if (isCurrent) {
                     tvStep2Typeface9.setTextColor(ContextCompat.getColor(this, android.R.color.white));
                     tvStep2Typeface9.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
@@ -486,7 +482,7 @@ public class ModuleTextActivity extends AppCompatActivity {
     private void changeTextAlignment(int alignment) {
         mModuleTextEntity.setAlignment(alignment);
         switch (alignment) {
-            case mAlignment_l:
+            case ModuleTextEntity.Alignment_l:
                 ivStep2AlignmentL.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_left_c));
                 rlStep2AlignmentL.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t_c));
                 ivStep2AlignmentC.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_center));
@@ -497,7 +493,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                 etContent.setGravity(Gravity.START);
                 tvStep3Preview.setGravity(Gravity.START);
                 break;
-            case mAlignment_c:
+            case ModuleTextEntity.Alignment_c:
                 ivStep2AlignmentL.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_left));
                 rlStep2AlignmentL.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 ivStep2AlignmentC.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_center_c));
@@ -508,7 +504,7 @@ public class ModuleTextActivity extends AppCompatActivity {
                 etContent.setGravity(Gravity.CENTER_HORIZONTAL);
                 tvStep3Preview.setGravity(Gravity.CENTER_HORIZONTAL);
                 break;
-            case mAlignment_r:
+            case ModuleTextEntity.Alignment_r:
                 ivStep2AlignmentL.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_left));
                 rlStep2AlignmentL.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_module_t));
                 ivStep2AlignmentC.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_module_t_center));

@@ -1,16 +1,21 @@
 package com.bulingzhuang.aimd.view.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.TransitionManager;
+import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bulingzhuang.aimd.R;
+import com.bulingzhuang.aimd.base.AimdApplication;
 import com.bulingzhuang.aimd.entity.ModuleTextEntity;
 import com.bulingzhuang.aimd.utils.Tools;
 import com.google.gson.Gson;
@@ -78,10 +83,35 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    @Subscriber( tag = "update_module_text")
-    private void updateModuleText(String jsonData){
-        Tools.showLogE("编辑完成的内容："+jsonData);
+    @Subscriber(tag = "update_module_text")
+    private void updateModuleText(String jsonData) {
+        Tools.showLogE("编辑完成的内容：" + jsonData);
         ModuleTextEntity moduleTextData = mGson.fromJson(jsonData, ModuleTextEntity.class);
-        
+        TextView tv = new TextView(this);
+        int childCount = llContent.getChildCount();
+        int px = Tools.dp2px(this, 16);
+        if (childCount == 0) {
+            tv.setPadding(px, px, px, px / 2);
+        } else {
+            tv.setPadding(px, px / 2, px, px / 2);
+        }
+        tv.setText(moduleTextData.getContent());
+        switch (moduleTextData.getAlignment()) {
+            case ModuleTextEntity.Alignment_l:
+                tv.setGravity(Gravity.START);
+                break;
+            case ModuleTextEntity.Alignment_c:
+                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                break;
+            case ModuleTextEntity.Alignment_r:
+                tv.setGravity(Gravity.END);
+                break;
+        }
+        tv.setTextSize(moduleTextData.getTextSize());
+        SparseArray<Typeface> typefaceArray = AimdApplication.getInstance().getTypefaceArray();
+        tv.setTypeface(typefaceArray.get(moduleTextData.getTextTypeface()));
+        tv.setLineSpacing(0, moduleTextData.getLineSpacing());
+        tv.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
+        llContent.addView(tv);
     }
 }

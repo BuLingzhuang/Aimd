@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.bulingzhuang.aimd.view.activity.UserActivity">
+    tools:content="com.bulingzhuang.aimd.view.activity.UserActivity">
 
     <LinearLayout
         android:id="@+id/ll_content"

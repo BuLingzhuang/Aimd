@@ -3,13 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_module_text"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="com.bulingzhuang.aimd.view.activity.ModuleTextActivity">
+    tools:content="com.bulingzhuang.aimd.view.activity.ModuleTextActivity">
 
 
+    <!-- 头部布局 -->
     <RelativeLayout
+        android:id="@+id/rl_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -23,76 +26,92 @@
             android:translationZ="4dp">
 
             <ImageView
+                android:id="@+id/btn_step_1"
                 android:layout_width="100dp"
-                android:layout_height="45dp"
-                app:srcCompat="@drawable/ic_module_indicator_s"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="28dp"
-                android:text="填写"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="80dp"
-            android:translationZ="3dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="45dp"
-
-                app:srcCompat="@drawable/ic_module_indicator_s"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="36dp"
-                android:text="编辑"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="160dp"
-            android:translationZ="2dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="45dp"
+                android:layout_height="42dp"
                 app:srcCompat="@drawable/ic_module_indicator_f"/>
 
             <TextView
+                android:id="@+id/tv_step_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="36dp"
+                android:layout_marginStart="28dp"
+                android:text="填写"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="80dp"
+            android:translationZ="3dp">
+
+            <ImageView
+                android:id="@+id/btn_step_2"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                app:srcCompat="@drawable/ic_module_indicator_s"/>
+
+            <TextView
+                android:id="@+id/tv_step_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="36dp"
+                android:text="编辑"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="160dp"
+            android:translationZ="2dp">
+
+            <ImageView
+                android:id="@+id/btn_step_3"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                app:srcCompat="@drawable/ic_module_indicator_s"/>
+
+            <TextView
+                android:id="@+id/tv_step_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="36dp"
                 android:text="预览"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="15sp"/>
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/iv_del"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_alignParentRight="true"
+            android:id="@+id/btn_submit"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="2dp"
-            android:transitionName="btn_add_del"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_editor_finish"/>
+        <ImageView
+            android:id="@+id/btn_del"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="2dp"
             app:srcCompat="@drawable/ic_editor_del"/>
 
     </RelativeLayout>
@@ -100,7 +119,599 @@
     <View
         android:layout_width="1dp"
         android:layout_height="360dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="42dp"
         android:background="@drawable/line_module"
+        android:scrollbars="none"
         android:translationZ="1dp"/>
+
+    <!-- Step_1 布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_step_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_toolbar"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_module_white"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_module_white"
+                android:gravity="start|top"
+                android:minHeight="100dp"
+                android:paddingBottom="48dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:translationZ="233dp">
+
+            <TextView
+                android:id="@+id/tv_textCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="8dp"
+                android:text="字数：0"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/btn_step_1_next"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="3dp"
+                app:srcCompat="@drawable/ic_arrow_next"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Step_2 布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_step_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_toolbar"
+        android:visibility="visible">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_module_white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_2_alignment_k"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="对齐方式："
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_step_2_alignment_l"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_module_t_c"
+                        android:padding="2dp">
+
+                        <ImageView
+                            android:id="@+id/iv_step_2_alignment_l"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_module_t_left_c"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_step_2_alignment_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_module_t"
+                        android:padding="2dp">
+
+                        <ImageView
+                            android:id="@+id/iv_step_2_alignment_c"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_module_t_center"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_step_2_alignment_r"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_module_t"
+                        android:padding="2dp">
+
+                        <ImageView
+                            android:id="@+id/iv_step_2_alignment_r"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_module_t_right"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_step_2_size_k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="字体大小："
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp"/>
+
+                        <ImageView
+                            android:id="@+id/iv_step_2_alignment_tips"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center_vertical"
+                            android:paddingBottom="2dp"
+                            android:paddingEnd="4dp"
+                            android:paddingStart="4dp"
+                            app:srcCompat="@drawable/ic_module_tips"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_step_2_alignment_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_module_t_c"
+                        android:paddingBottom="2dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="2dp"
+                        android:text="14"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_step_2_alignment_sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:text="SP"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_step_2_alignment_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.7"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:visibility="gone"/>
+
+                <SeekBar
+                    android:id="@+id/sb_step_2"
+                    style="@style/Widget.AppCompat.SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:max="92"
+                    android:progress="6"
+                    android:progressBackgroundTint="@color/colorPrimary"
+                    android:progressTint="@color/colorPrimary"
+                    android:thumbTint="@color/colorPrimary"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_2_other"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="行间距："
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_step_2_spacing_1"
+                        android:layout_width="42dp"
+                        android:layout_height="28dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_module_t_c"
+                        android:gravity="center"
+                        android:text="x1.0"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_step_2_spacing_2"
+                        android:layout_width="42dp"
+                        android:layout_height="28dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_module_t"
+                        android:gravity="center"
+                        android:text="x1.3"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_step_2_spacing_3"
+                        android:layout_width="42dp"
+                        android:layout_height="28dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_module_t"
+                        android:gravity="center"
+                        android:text="x1.6"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_2_typeface_k"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        android:text="字体选择："
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:alignContent="flex_start"
+                        app:alignItems="flex_start"
+                        app:flexDirection="row"
+                        app:flexWrap="wrap"
+                        app:showDivider="middle">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t_c"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@android:color/white"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_5"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_6"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_7"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_8"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="7dp"
+                            app:layout_flexBasisPercent="33.333%">
+
+                            <TextView
+                                android:id="@+id/tv_step_2_typeface_9"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/bg_module_t"
+                                android:gravity="center"
+                                android:paddingBottom="5dp"
+                                android:paddingTop="5dp"
+                                android:text="汉字_Aa"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"/>
+                        </RelativeLayout>
+                    </com.google.android.flexbox.FlexboxLayout>
+
+                    <TextView
+                        android:id="@+id/tv_step_2_typeface_example"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:background="@drawable/bg_module_t_border"
+                        android:gravity="start"
+                        android:padding="12dp"
+                        android:text="汉字_Aa"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp">
+
+                        <ImageView
+                            android:id="@+id/btn_step_2_last"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:padding="2dp"
+                            app:srcCompat="@drawable/ic_arrow_last"/>
+
+                        <ImageView
+                            android:id="@+id/btn_step_2_next"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="16dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:padding="2dp"
+                            app:srcCompat="@drawable/ic_arrow_next"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <!-- Step_3 布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_step_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_toolbar"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_module_white"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/ll_step_3_upon_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+                <TextView
+                    android:id="@+id/tv_step_3_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
 </RelativeLayout>

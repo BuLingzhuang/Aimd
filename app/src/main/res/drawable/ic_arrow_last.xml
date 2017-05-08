@@ -1,0 +1,4 @@
+<vector android:height="24dp" android:viewportHeight="383"
+    android:viewportWidth="380" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/colorPrimaryDark" android:name="形状 3" android:pathData="m213 95 -97 97 97 97 24 -23 -74 -74 74 -73 -24 -24zm-23 -38c74.6 0 135 60.4 135 135c0 74.6 -60.4 135 -135 135c-74.6 0 -135 -60.4 -135 -135c0 -74.6 60.4 -135 135 -135zm0 -35c-93.9 0 -170 76.1 -170 170c0 93.9 76.1 170 170 170c93.9 0 170 -76.1 170 -170c0 -93.9 -76.1 -170 -170 -170z"/>
+</vector>

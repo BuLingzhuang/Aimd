@@ -3,9 +3,15 @@
     <color name="colorPrimary">#24292e</color>
     <color name="colorPrimaryLight">#495056</color>
     <color name="colorPrimaryDark">#1a1e21</color>
+    <color name="colorPrimaryDarkAlpha">#aa1a1e21</color>
     <color name="colorAccent">#a6a7a7</color>
     <color name="bg_editor_add">#efefef</color>
     <color name="tipsRed">#de4d5e</color>
+
+    <color name="forgive_her_green_light">#B0FA69</color>
+    <color name="forgive_her_green">#83bb4e</color>
+    <color name="forgive_her_green_dark">#4d801d</color>
+
 
     <color name="welcome_t">#d1d8e1</color>
 

@@ -67,7 +67,7 @@ public class ModuleTypeActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.arg1 == 2333) {
-                Tools.showLogE("计数器："+animCounter);
+                Tools.showLogE("计数器：" + animCounter);
                 switch (animCounter) {
                     case 0:
                         Animation animation0 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
@@ -113,7 +113,8 @@ public class ModuleTypeActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cv_m_text:
-                startActivity(new Intent(this,ModuleTextActivity.class));
+                startActivity(new Intent(this, ModuleTextActivity.class));
+                finish();
                 break;
             case R.id.cv_m_image:
                 break;

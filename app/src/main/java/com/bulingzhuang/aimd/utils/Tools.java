@@ -66,6 +66,19 @@ public class Tools {
     /** 被封印的禁忌♂艺术 */
 
     /**
+     * 修改字体(使用SparseArray字体)
+     *
+     * @param views
+     */
+    public static void changeFont(int code, View... views) {
+        for (View view : views) {
+            if (view instanceof TextView) {
+                ((TextView) view).setTypeface(AimdApplication.getInstance().getTypefaceArray().get(code, AimdApplication.getInstance().getCustomTypeface()));
+            }
+        }
+    }
+
+    /**
      * 修改字体
      *
      * @param views
@@ -117,9 +130,9 @@ public class Tools {
     public static void showSnackBar(Context context, String text, View genView) {
         Snackbar snackbar = Snackbar.make(genView, text, Snackbar.LENGTH_SHORT);
         Snackbar.SnackbarLayout snackBarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.snackbar_white));
+        snackBarLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.snackbar_white));
         TextView tv = (TextView) snackBarLayout.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+        tv.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
         changeFont(tv);
         snackbar.show();
     }
@@ -132,7 +145,7 @@ public class Tools {
      * @param genView
      */
     public static void showSnackBarDark(Context context, String text, View genView) {
-        showSnackBarDark(context, text, genView,Snackbar.LENGTH_SHORT);
+        showSnackBarDark(context, text, genView, Snackbar.LENGTH_SHORT);
     }
 
     /**
@@ -142,12 +155,12 @@ public class Tools {
      * @param text
      * @param genView
      */
-    public static void showSnackBarDark(Context context, String text, View genView,int duration) {
+    public static void showSnackBarDark(Context context, String text, View genView, int duration) {
         Snackbar snackbar = Snackbar.make(genView, text, duration);
         Snackbar.SnackbarLayout snackBarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.snackbar_dark));
+        snackBarLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.snackbar_dark));
         TextView tv = (TextView) snackBarLayout.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(ContextCompat.getColor(context,android.R.color.white));
+        tv.setTextColor(ContextCompat.getColor(context, android.R.color.white));
         changeFont(tv);
         snackbar.show();
     }
@@ -157,7 +170,7 @@ public class Tools {
      *
      * @param context
      */
-    public static void leanCloudExceptionHadling(Context context, AVException e,View genView) {
+    public static void leanCloudExceptionHadling(Context context, AVException e, View genView) {
         int eCode = e.getCode();
         String eStr;
         switch (eCode) {
@@ -183,7 +196,7 @@ public class Tools {
                 eStr = e.getMessage();
                 break;
         }
-        Tools.showSnackBarDark(context, eStr, genView,Snackbar.LENGTH_LONG);
+        Tools.showSnackBarDark(context, eStr, genView, Snackbar.LENGTH_LONG);
     }
 
     /**

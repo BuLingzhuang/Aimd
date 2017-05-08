@@ -10,7 +10,7 @@
               android:paddingLeft="36dp"
               android:paddingRight="36dp"
               android:paddingTop="48dp"
-              tools:context="com.bulingzhuang.aimd.view.activity.EditorActivity">
+              tools:content="com.bulingzhuang.aimd.view.activity.EditorActivity">
 
     <TextView
         android:id="@+id/tv_title"

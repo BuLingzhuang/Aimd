@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:paddingBottom="16dp"
-    tools:context="com.bulingzhuang.aimd.WelcomeActivity">
+    tools:content="com.bulingzhuang.aimd.WelcomeActivity">
 
     <ImageView
         android:id="@+id/iv_bg_0"

@@ -2,6 +2,7 @@ package com.bulingzhuang.aimd.base;
 
 import android.app.Application;
 import android.graphics.Typeface;
+import android.util.SparseArray;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.bulingzhuang.aimd.utils.SharePreferenceUtil;
@@ -16,6 +17,7 @@ public class AimdApplication extends Application {
 
     public static AimdApplication sAimdApplication;
     private Typeface mTypeface;
+    private SparseArray<Typeface> mTypefaceArray;
 
     @Override
     public void onCreate() {
@@ -43,7 +45,24 @@ public class AimdApplication extends Application {
         return mTypeface;
     }
 
-    public void modifyCustomTypeface(Typeface typeface) {
-        mTypeface = typeface;
+    public SparseArray<Typeface> getTypefaceArray() {
+        if (mTypefaceArray == null) {
+            mTypefaceArray = new SparseArray<>();
+            mTypefaceArray.append(2, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFJinHei_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(3, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFKeKe_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(4, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFKeSong_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(5, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFLangQian_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(6, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFLangSong_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(7, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFManYu_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(8, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFShangHei_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(9, Typeface.createFromAsset(getApplicationContext().getAssets(), "MFYueYuan_Noncommercial_Regular.ttf"));
+            mTypefaceArray.append(1,getCustomTypeface());
+        }
+        return mTypefaceArray;
+    }
+
+    public void setTypefaceArray(SparseArray<Typeface> typefaceArray) {
+        typefaceArray.append(1,getCustomTypeface());
+        mTypefaceArray = typefaceArray;
     }
 }

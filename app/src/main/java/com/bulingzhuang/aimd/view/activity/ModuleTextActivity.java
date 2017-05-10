@@ -1,6 +1,7 @@
 package com.bulingzhuang.aimd.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -13,6 +14,7 @@ import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.util.SparseArray;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -24,12 +26,16 @@ import android.widget.TextView;
 
 import com.bulingzhuang.aimd.R;
 import com.bulingzhuang.aimd.base.AimdApplication;
+import com.bulingzhuang.aimd.entity.BaseModuleEntity;
 import com.bulingzhuang.aimd.entity.ModuleTextEntity;
+import com.bulingzhuang.aimd.entity.ModuleTitleEntity;
 import com.bulingzhuang.aimd.utils.Tools;
+import com.bulingzhuang.aimd.utils.UploadModuleUtil;
 import com.google.gson.Gson;
 
 import org.simple.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -149,6 +155,9 @@ public class ModuleTextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_module_text);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
+        Tools.changeFont(tvStep1, tvStep2, tvStep3, etContent, tvTextCounter, tvStep2AlignmentK, tvStep2SizeK,
+                tvStep2AlignmentValue, tvStep2AlignmentSp, tvStep2AlignmentTips, tvStep2Other, tvStep2TypefaceK,
+                tvStep2TypefaceExample, tvStep2Spacing1, tvStep2Spacing2, tvStep2Spacing3, tvStep3Preview);
         init();
     }
 
@@ -160,7 +169,10 @@ public class ModuleTextActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mModuleTextEntity = new ModuleTextEntity("", ModuleTextEntity.Alignment_l, 14, ModuleTextEntity.LineSpacing_1, ModuleTextEntity.Typeface_1);
+        Intent intent = getIntent();
+        ArrayList<String> contentArray = intent.getStringArrayListExtra("contentArray");
+        setUponContent(contentArray);
+        mModuleTextEntity = new ModuleTextEntity("", ModuleTextEntity.Alignment_l, 14, ModuleTextEntity.LineSpacing_1, ModuleTextEntity.Typeface_1, BaseModuleEntity.ModuleType.TEXT);
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -279,6 +291,34 @@ public class ModuleTextActivity extends AppCompatActivity {
             case R.id.btn_step_2_next://第二步到第三步
                 changeStep(mCurrentStep + 1);
                 break;
+        }
+    }
+
+    /**
+     * 处理之前编辑过的模块
+     *
+     * @param contentArray
+     */
+    private void setUponContent(ArrayList<String> contentArray) {
+        Gson gson = new Gson();
+        for (int i = 0; i < contentArray.size(); i++) {
+            BaseModuleEntity baseModuleData = gson.fromJson(contentArray.get(i), BaseModuleEntity.class);
+            switch (baseModuleData.getModuleType()) {
+                case TITLE:
+                    ModuleTitleEntity titleData = gson.fromJson(contentArray.get(i), ModuleTitleEntity.class);
+                    UploadModuleUtil.uploadTitleModule(this, llStep3UponContent, titleData);
+                    break;
+                case TEXT:
+                    ModuleTextEntity textData = gson.fromJson(contentArray.get(i), ModuleTextEntity.class);
+                    UploadModuleUtil.uploadTextModule(this, llStep3UponContent, textData);
+                    break;
+                case IMAGE:
+                    break;
+                case MIC:
+                    break;
+                case LOCATION:
+                    break;
+            }
         }
     }
 
@@ -597,6 +637,22 @@ public class ModuleTextActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    /**
+     * 点击后退判断是否回到上一步
+     * @param paramInt
+     * @param paramKeyEvent
+     * @return
+     */
+    public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent) {
+        if (KeyEvent.KEYCODE_BACK == paramInt) {
+            if (mCurrentStep > mStep_1) {
+                changeStep(mCurrentStep - 1);
+                return true;
+            }
+        }
+        return super.onKeyDown(paramInt, paramKeyEvent);
     }
 
     /**

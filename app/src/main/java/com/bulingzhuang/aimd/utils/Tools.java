@@ -220,7 +220,7 @@ public class Tools {
      * @param path
      */
     public static String saveBitmap(Bitmap bitmap, String path) {
-//		Log.i("info", "saveFile:" + path);
+		Log.e("blz", "saveFile:" + path);
         File file = new File(path);
         // 若父目录不存在 则创建父目录
         if (!file.getParentFile().exists()) {

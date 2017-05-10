@@ -6,7 +6,7 @@ package com.bulingzhuang.aimd.entity;
  * E-mail:bulingzhuang@foxmail.com
  */
 
-public class ModuleTextEntity {
+public class ModuleTextEntity extends BaseModuleEntity{
 
     public static final int Alignment_l = 1, Alignment_c = 2, Alignment_r = 3;//对齐方式
     public static final float LineSpacing_1 = 1.0f, LineSpacing_2 = 1.3f, LineSpacing_3 = 1.6f;//行间距
@@ -22,12 +22,13 @@ public class ModuleTextEntity {
     public ModuleTextEntity() {
     }
 
-    public ModuleTextEntity(String content, int alignment, int textSize, float lineSpacing, int textTypeface) {
+    public ModuleTextEntity(String content, int alignment, int textSize, float lineSpacing, int textTypeface,ModuleType moduleType) {
         this.content = content;
         this.alignment = alignment;
         this.textSize = textSize;
         this.lineSpacing = lineSpacing;
         this.textTypeface = textTypeface;
+        super.setModuleType(moduleType);
     }
 
     public float getLineSpacing() {

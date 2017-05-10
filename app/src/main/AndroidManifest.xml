@@ -43,6 +43,9 @@
             android:name=".view.activity.ModuleTextActivity"
             android:windowSoftInputMode="adjustUnspecified">
         </activity>
+        <activity android:name=".view.activity.ModuleTitleActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
     </application>
 
 </manifest>

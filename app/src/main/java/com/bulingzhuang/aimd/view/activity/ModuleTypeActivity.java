@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bulingzhuang.aimd.R;
 import com.bulingzhuang.aimd.utils.Tools;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,18 +49,33 @@ public class ModuleTypeActivity extends AppCompatActivity {
     TextView tvMLocation;
     @Bind(R.id.cv_m_location)
     CardView cvMLocation;
+    @Bind(R.id.tv_m_title)
+    TextView tvMTitle;
+    @Bind(R.id.cv_m_title)
+    CardView cvMTitle;
     private Timer mTimer;
+    private int animCounter;
+
+    private ArrayList<String> mContentArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module_type);
         ButterKnife.bind(this);
-        Tools.changeFont(tvTitle, tvMText, tvMImage, tvMMic, tvMLocation);
+        Tools.changeFont(tvTitle,tvMTitle, tvMText, tvMImage, tvMMic, tvMLocation);
+        Intent intent = getIntent();
+        boolean showTitleModule = intent.getBooleanExtra("showTitleModule", false);
+        if (showTitleModule) {
+            animCounter = 0;
+            cvMTitle.setVisibility(View.INVISIBLE);
+        }else {
+            animCounter = 1;
+            cvMTitle.setVisibility(View.GONE);
+        }
+        mContentArray = intent.getStringArrayListExtra("contentArray");
         startEnterAnim();
     }
-
-    private int animCounter;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -70,21 +86,26 @@ public class ModuleTypeActivity extends AppCompatActivity {
 //                Tools.showLogE("计数器：" + animCounter);
                 switch (animCounter) {
                     case 0:
+                        Animation animation4 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
+                        cvMTitle.startAnimation(animation4);
+                        cvMTitle.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
                         Animation animation0 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
                         cvMText.startAnimation(animation0);
                         cvMText.setVisibility(View.VISIBLE);
                         break;
-                    case 1:
+                    case 2:
                         Animation animation1 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
                         cvMImage.startAnimation(animation1);
                         cvMImage.setVisibility(View.VISIBLE);
                         break;
-                    case 2:
+                    case 3:
                         Animation animation2 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
                         cvMMic.startAnimation(animation2);
                         cvMMic.setVisibility(View.VISIBLE);
                         break;
-                    case 3:
+                    case 4:
                         Animation animation3 = AnimationUtils.loadAnimation(ModuleTypeActivity.this, R.anim.module_type_item_translate);
                         cvMLocation.startAnimation(animation3);
                         cvMLocation.setVisibility(View.VISIBLE);
@@ -109,11 +130,19 @@ public class ModuleTypeActivity extends AppCompatActivity {
         mTimer.schedule(timerTask, 233, 233);
     }
 
-    @OnClick({R.id.cv_m_text, R.id.cv_m_image, R.id.cv_m_mic, R.id.cv_m_location, R.id.iv_del})
+    @OnClick({R.id.cv_m_title,R.id.cv_m_text, R.id.cv_m_image, R.id.cv_m_mic, R.id.cv_m_location, R.id.iv_del})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
+            case R.id.cv_m_title:
+                intent = new Intent(this, ModuleTitleActivity.class);
+                startActivity(intent);
+                finish();
+                break;
             case R.id.cv_m_text:
-                startActivity(new Intent(this, ModuleTextActivity.class));
+                intent = new Intent(this, ModuleTextActivity.class);
+                intent.putStringArrayListExtra("contentArray",mContentArray);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.cv_m_image:

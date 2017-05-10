@@ -16,4 +16,5 @@
     <color name="welcome_t">#d1d8e1</color>
 
     <color name="user_btn_submit_alpha">#aa24292e</color>
+    <color name="module_title_bg">#f0efef</color>
 </resources>

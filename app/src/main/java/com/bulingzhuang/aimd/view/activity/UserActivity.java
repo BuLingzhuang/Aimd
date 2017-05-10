@@ -381,7 +381,7 @@ public class UserActivity extends AppCompatActivity {
                     ivPortraitType.setVisibility(View.INVISIBLE);
                     tvLoading.setVisibility(View.VISIBLE);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                     final byte[] bitmapBytes = stream.toByteArray();
                     final AVFile avFile = AVFile.withAbsoluteLocalPath("ICON_" + Tools.getAndroidIMEI(this) + suffix, filePath);
                     avFile.saveInBackground(new SaveCallback() {

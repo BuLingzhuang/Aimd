@@ -1,27 +1,26 @@
 package com.bulingzhuang.aimd.view.activity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.TransitionManager;
-import android.util.SparseArray;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bulingzhuang.aimd.R;
-import com.bulingzhuang.aimd.base.AimdApplication;
 import com.bulingzhuang.aimd.entity.ModuleTextEntity;
+import com.bulingzhuang.aimd.entity.ModuleTitleEntity;
 import com.bulingzhuang.aimd.utils.Tools;
+import com.bulingzhuang.aimd.utils.UploadModuleUtil;
 import com.google.gson.Gson;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,6 +42,7 @@ public class EditorActivity extends AppCompatActivity {
     @Bind(R.id.ll_parent)
     LinearLayout llParent;
     private Gson mGson;
+    private ArrayList<String> mContentArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class EditorActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         Tools.changeFont(tvAdd);
         mGson = new Gson();
+        mContentArray = new ArrayList<>();
     }
 
     @Override
@@ -75,7 +76,10 @@ public class EditorActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.ll_add:
-                startActivity(new Intent(this, ModuleTypeActivity.class));
+                Intent intent = new Intent(this, ModuleTypeActivity.class);
+                intent.putStringArrayListExtra("contentArray", mContentArray);
+                intent.putExtra("showTitleModule", llContent.getChildCount() == 0);
+                startActivity(intent);
                 break;
             case R.id.iv_finish:
                 Tools.showSnackBar(this, "完成", llParent);
@@ -85,33 +89,17 @@ public class EditorActivity extends AppCompatActivity {
 
     @Subscriber(tag = "update_module_text")
     private void updateModuleText(String jsonData) {
-        Tools.showLogE("编辑完成的内容：" + jsonData);
+        Tools.showLogE("Text编辑完成的内容：" + jsonData);
         ModuleTextEntity moduleTextData = mGson.fromJson(jsonData, ModuleTextEntity.class);
-        TextView tv = new TextView(this);
-        int childCount = llContent.getChildCount();
-        int px = Tools.dp2px(this, 16);
-        if (childCount == 0) {
-            tv.setPadding(px, px, px, px / 2);
-        } else {
-            tv.setPadding(px, px / 2, px, px / 2);
-        }
-        tv.setText(moduleTextData.getContent());
-        switch (moduleTextData.getAlignment()) {
-            case ModuleTextEntity.Alignment_l:
-                tv.setGravity(Gravity.START);
-                break;
-            case ModuleTextEntity.Alignment_c:
-                tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                break;
-            case ModuleTextEntity.Alignment_r:
-                tv.setGravity(Gravity.END);
-                break;
-        }
-        tv.setTextSize(moduleTextData.getTextSize());
-        SparseArray<Typeface> typefaceArray = AimdApplication.getInstance().getTypefaceArray();
-        tv.setTypeface(typefaceArray.get(moduleTextData.getTextTypeface()));
-        tv.setLineSpacing(0, moduleTextData.getLineSpacing());
-        tv.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
-        llContent.addView(tv);
+        UploadModuleUtil.uploadTextModule(this, llContent, moduleTextData);
+        mContentArray.add(jsonData);
+    }
+
+    @Subscriber(tag = "update_module_title")
+    private void updateModuleTitle(String jsonData) {
+        Tools.showLogE("Title编辑完成的内容：" + jsonData);
+        ModuleTitleEntity moduleTitleData = mGson.fromJson(jsonData, ModuleTitleEntity.class);
+        UploadModuleUtil.uploadTitleModule(this, llContent, moduleTitleData);
+        mContentArray.add(jsonData);
     }
 }

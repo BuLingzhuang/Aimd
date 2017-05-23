@@ -1,0 +1,4 @@
+<vector android:height="24dp" android:viewportHeight="383"
+    android:viewportWidth="380" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/forgive_her_green_light" android:pathData="m265.6 117 -111.2 111.4 -39.5 -39.2 -23.8 23.8 64.5 62.9 134.5 -134.8 -24.4 -24.2zm-74.6 -60c74.6 0 135 60.4 135 135c0 74.6 -60.4 135 -135 135c-74.6 0 -135 -60.4 -135 -135c0 -74.6 60.4 -135 135 -135zm-0.5 -35c-93.6 0 -169.5 75.9 -169.5 169.5c0 93.6 75.9 169.5 169.5 169.5c93.6 0 169.5 -75.9 169.5 -169.5c0 -93.6 -75.9 -169.5 -169.5 -169.5z"/>
+</vector>

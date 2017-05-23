@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.bulingzhuang.aimd.R;
 import com.bulingzhuang.aimd.base.AimdApplication;
+import com.bulingzhuang.aimd.entity.ModuleImageEntity;
 import com.bulingzhuang.aimd.entity.ModuleTextEntity;
 import com.bulingzhuang.aimd.entity.ModuleTitleEntity;
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 /**
  * Created by bulingzhuang
@@ -38,9 +41,9 @@ public class UploadModuleUtil {
         int childCount = parentView.getChildCount();
         int px = Tools.dp2px(context, 16);
         if (childCount == 0) {
-            tv.setPadding(px, px, px, px*3 / 16);
+            tv.setPadding(px, px, px, px * 3 / 16);
         } else {
-            tv.setPadding(px, px*3 / 16, px, px*3 / 16);
+            tv.setPadding(px, px * 3 / 16, px, px * 3 / 16);
         }
         tv.setText(data.getContent());
         switch (data.getAlignment()) {
@@ -104,5 +107,97 @@ public class UploadModuleUtil {
         }
 
         parentView.addView(inflate);
+    }
+
+    public static void uploadImageModule(Context context, LinearLayout parentView, ModuleImageEntity data) {
+        int type = data.getType();
+        List<ModuleImageEntity.PicEntity> picList = data.getPicList();
+        View inflate = null;
+        switch (picList.size()) {
+            case 1:
+                inflate = LayoutInflater.from(context).inflate(R.layout.module_image_1_0, null);
+                Tools.showLogE("加载的1-0");
+                break;
+            case 2:
+                switch (type) {
+                    case 0:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_2_0, null);
+                        Tools.showLogE("加载的2-0");
+                        break;
+                    case 1:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_2_1, null);
+                        Tools.showLogE("加载的2-1");
+                        break;
+                }
+                break;
+            case 3:
+                switch (type) {
+                    case 0:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_3_0, null);
+                        Tools.showLogE("加载的3-0");
+                        break;
+                    case 1:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_3_1, null);
+                        Tools.showLogE("加载的3-1");
+                        break;
+                    case 2:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_3_2, null);
+                        Tools.showLogE("加载的3-2");
+                        break;
+                    case 3:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_3_3, null);
+                        Tools.showLogE("加载的3-3");
+                        break;
+                }
+                break;
+
+            case 4:
+                switch (type) {
+                    case 0:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_4_0, null);
+                        Tools.showLogE("加载的4-0");
+                        break;
+                    case 1:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_4_1, null);
+                        Tools.showLogE("加载的4-1");
+                        break;
+                    case 2:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_4_2, null);
+                        Tools.showLogE("加载的4-2");
+                        break;
+                    case 3:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_4_3, null);
+                        Tools.showLogE("加载的4-3");
+                        break;
+                    case 4:
+                        inflate = LayoutInflater.from(context).inflate(R.layout.module_image_4_4, null);
+                        Tools.showLogE("加载的4-4");
+                        break;
+                }
+                break;
+        }
+        if (inflate != null) {
+            for (int i = 0; i < picList.size(); i++) {
+                ImageView iv = null;
+                switch (i) {
+                    case 0:
+                        iv = (ImageView) inflate.findViewById(R.id.iv_0);
+                        break;
+                    case 1:
+                        iv = (ImageView) inflate.findViewById(R.id.iv_1);
+                        break;
+                    case 2:
+                        iv = (ImageView) inflate.findViewById(R.id.iv_2);
+                        break;
+                    case 3:
+                        iv = (ImageView) inflate.findViewById(R.id.iv_3);
+                        break;
+                }
+                if (iv != null) {
+                    Glide.with(context).load(picList.get(i).getUri()).error(R.mipmap.icon_origin).crossFade().into(iv);
+                }
+            }
+            parentView.addView(inflate);
+        }
     }
 }

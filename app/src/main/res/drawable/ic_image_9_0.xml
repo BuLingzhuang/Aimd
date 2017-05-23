@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="500dp"
+        android:height="800dp"
+        android:viewportWidth="500.0"
+        android:viewportHeight="800.0">
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M32,151L121,151A32,32 0,0 1,153 183L153,272A32,32 0,0 1,121 304L32,304A32,32 0,0 1,0 272L0,183A32,32 0,0 1,32 151z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M205,151L294,151A32,32 0,0 1,326 183L326,272A32,32 0,0 1,294 304L205,304A32,32 0,0 1,173 272L173,183A32,32 0,0 1,205 151z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M378,151L467,151A32,32 0,0 1,499 183L499,272A32,32 0,0 1,467 304L378,304A32,32 0,0 1,346 272L346,183A32,32 0,0 1,378 151z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M32,324L121,324A32,32 0,0 1,153 356L153,445A32,32 0,0 1,121 477L32,477A32,32 0,0 1,0 445L0,356A32,32 0,0 1,32 324z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M205,324L294,324A32,32 0,0 1,326 356L326,445A32,32 0,0 1,294 477L205,477A32,32 0,0 1,173 445L173,356A32,32 0,0 1,205 324z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M205,497L294,497A32,32 0,0 1,326 529L326,618A32,32 0,0 1,294 650L205,650A32,32 0,0 1,173 618L173,529A32,32 0,0 1,205 497z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M378,324L467,324A32,32 0,0 1,499 356L499,445A32,32 0,0 1,467 477L378,477A32,32 0,0 1,346 445L346,356A32,32 0,0 1,378 324z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M378,497L467,497A32,32 0,0 1,499 529L499,618A32,32 0,0 1,467 650L378,650A32,32 0,0 1,346 618L346,529A32,32 0,0 1,378 497z"/>
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M32,497L121,497A32,32 0,0 1,153 529L153,618A32,32 0,0 1,121 650L32,650A32,32 0,0 1,0 618L0,529A32,32 0,0 1,32 497z"/>
+</vector>

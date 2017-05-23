@@ -146,6 +146,10 @@ public class ModuleTypeActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.cv_m_image:
+                intent = new Intent(this, ModuleImageActivity.class);
+                intent.putStringArrayListExtra("contentArray",mContentArray);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.cv_m_mic:
                 break;

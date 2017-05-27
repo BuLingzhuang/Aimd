@@ -65,7 +65,7 @@ class WelcomeActivity : AppCompatActivity() {
             typefaceArray.append(7, Typeface.createFromAsset(applicationContext.assets, "MFManYu_Noncommercial_Regular.ttf"))
             typefaceArray.append(8, Typeface.createFromAsset(applicationContext.assets, "MFShangHei_Noncommercial_Regular.ttf"))
             typefaceArray.append(9, Typeface.createFromAsset(applicationContext.assets, "MFYueYuan_Noncommercial_Regular.ttf"))
-            AimdApplication.getInstance().typefaceArray = typefaceArray
+            (application as AimdApplication).typefaceArray = typefaceArray
         }.run()
 
     }

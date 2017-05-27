@@ -7,6 +7,8 @@
     <color name="colorAccent">#a6a7a7</color>
     <color name="bg_editor_add">#efefef</color>
     <color name="tipsRed">#de4d5e</color>
+    <color name="darkGreen">#009587</color>
+    <color name="darkGreen_alpha">#dafffb</color>
 
     <color name="forgive_her_green_light">#98de56</color>
     <color name="forgive_her_green">#83bb4e</color>

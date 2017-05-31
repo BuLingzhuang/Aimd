@@ -11,11 +11,10 @@
     <ImageView
         android:id="@+id/iv_0"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:maxHeight="160dp"
+        android:layout_height="160dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:adjustViewBounds="true"/>
 
     <View
@@ -25,11 +24,10 @@
     <ImageView
         android:id="@+id/iv_1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:maxHeight="160dp"
+        android:layout_height="160dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:adjustViewBounds="true"/>
 
 </LinearLayout>

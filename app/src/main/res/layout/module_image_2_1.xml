@@ -10,18 +10,16 @@
     <ImageView
         android:id="@+id/iv_0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="160dp"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"/>
+        android:layout_height="160dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
 
     <ImageView
         android:id="@+id/iv_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="160dp"
+        android:layout_height="160dp"
         android:layout_marginTop="2dp"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
 
 </LinearLayout>

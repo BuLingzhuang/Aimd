@@ -125,13 +125,13 @@ object Tools {
      * @param genView
      */
     fun showSnackBar(context: Context, text: String, genView: View) {
-        val snackbar = Snackbar.make(genView, text, Snackbar.LENGTH_SHORT)
-        val snackBarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackBar = Snackbar.make(genView, text, Snackbar.LENGTH_SHORT)
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
         snackBarLayout.background = ContextCompat.getDrawable(context, R.drawable.snackbar_white)
         val tv = snackBarLayout.findViewById(android.support.design.R.id.snackbar_text) as TextView
         tv.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
         changeFont(tv)
-        snackbar.show()
+        snackBar.show()
     }
 
     /**

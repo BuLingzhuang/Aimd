@@ -175,8 +175,7 @@ class ModuleImageActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_step_2//第二步
             -> changeStep(mStep_2)
             R.id.btn_submit//提交
-            -> {
-            }
+            -> submit()
             R.id.btn_del//关闭
             -> onBackPressed()
             R.id.btn_next//下一步
@@ -184,6 +183,17 @@ class ModuleImageActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_last//上一步
             -> changeStep(mStep_1)
         }
+    }
+
+    /**
+     * 提交数据
+     */
+    private fun submit() {
+        //TODO 待处理
+//        val gson = Gson()
+//        val jsonData = gson.toJson(mModuleImageEntity)
+//        EventBus.getDefault().post(jsonData, "update_module_image")
+//        onBackPressed()
     }
 
     /**

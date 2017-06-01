@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.0 rc2"
     defaultConfig {
         applicationId "com.bulingzhuang.aimd"
         minSdkVersion 21

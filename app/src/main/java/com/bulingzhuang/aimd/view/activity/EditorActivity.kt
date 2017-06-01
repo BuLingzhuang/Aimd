@@ -8,6 +8,7 @@ import android.transition.TransitionManager
 import android.view.View
 
 import com.bulingzhuang.aimd.R
+import com.bulingzhuang.aimd.entity.ModuleImageEntity
 import com.bulingzhuang.aimd.entity.ModuleTextEntity
 import com.bulingzhuang.aimd.entity.ModuleTitleEntity
 import com.bulingzhuang.aimd.utils.Tools
@@ -79,6 +80,14 @@ class EditorActivity : AppCompatActivity(), View.OnClickListener {
         Tools.showLogE("Title编辑完成的内容：" + jsonData)
         val moduleTitleData = gson!!.fromJson(jsonData, ModuleTitleEntity::class.java)
         UploadModuleUtil.uploadTitleModule(this, ll_content, moduleTitleData)
+        mContentArray!!.add(jsonData)
+    }
+
+    @Subscriber(tag = "update_module_image")
+    private fun updateModuleImage(jsonData: String) {
+        Tools.showLogE("Image编辑完成的内容：" + jsonData)
+        val moduleImageData = gson!!.fromJson(jsonData, ModuleImageEntity::class.java)
+        UploadModuleUtil.uploadImageModule(this, ll_content, moduleImageData)
         mContentArray!!.add(jsonData)
     }
 }

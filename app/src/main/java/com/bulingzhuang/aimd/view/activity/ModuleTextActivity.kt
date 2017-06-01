@@ -20,6 +20,7 @@ import android.widget.SeekBar
 import com.bulingzhuang.aimd.R
 import com.bulingzhuang.aimd.base.AimdApplication
 import com.bulingzhuang.aimd.entity.BaseModuleEntity
+import com.bulingzhuang.aimd.entity.ModuleImageEntity
 import com.bulingzhuang.aimd.entity.ModuleTextEntity
 import com.bulingzhuang.aimd.entity.ModuleTitleEntity
 import com.bulingzhuang.aimd.utils.Tools
@@ -177,6 +178,8 @@ class ModuleTextActivity : AppCompatActivity(), View.OnClickListener {
                     UploadModuleUtil.uploadTextModule(this, ll_step_3_upon_content, textData)
                 }
                 BaseModuleEntity.ModuleType.IMAGE -> {
+                    val imageData = gson.fromJson(contentArray[i], ModuleImageEntity::class.java)
+                    UploadModuleUtil.uploadImageModule(this, ll_step_3_upon_content, imageData)
                 }
                 BaseModuleEntity.ModuleType.MIC -> {
                 }

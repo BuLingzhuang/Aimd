@@ -190,10 +190,10 @@ class ModuleImageActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun submit() {
         //TODO 待处理
-//        val gson = Gson()
-//        val jsonData = gson.toJson(mModuleImageEntity)
-//        EventBus.getDefault().post(jsonData, "update_module_image")
-//        onBackPressed()
+        val gson = Gson()
+        val jsonData = gson.toJson(mModuleImageEntity)
+        EventBus.getDefault().post(jsonData, "update_module_image")
+        onBackPressed()
     }
 
     /**

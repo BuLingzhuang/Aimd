@@ -90,6 +90,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="2dp"
             app:srcCompat="@drawable/ic_editor_del"/>
+
         <ImageView
             android:id="@+id/btn_next"
             android:layout_width="43dp"
@@ -98,9 +99,9 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_marginStart="12dp"
-            android:visibility="gone"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="3dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_arrow_next_white"/>
 
         <ImageView
@@ -111,9 +112,9 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="80dp"
             android:layout_marginStart="12dp"
-            android:visibility="gone"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="3dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_arrow_last_white"/>
 
     </RelativeLayout>
@@ -132,8 +133,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_toolbar"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -277,15 +278,22 @@
                 app:cardElevation="0dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
-                <LinearLayout
-                    android:id="@+id/ll_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
         </ScrollView>
     </RelativeLayout>

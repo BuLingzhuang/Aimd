@@ -121,6 +121,9 @@ class ModuleTypeActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.cv_m_mic -> {
+                intent = Intent(this, ModuleMicActivity::class.java)
+                startActivity(intent)
+                finish()
             }
             R.id.cv_m_location -> {
             }

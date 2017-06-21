@@ -12,52 +12,52 @@
 
     <ImageView
         android:id="@+id/iv_bg_0"
-        android:layout_marginTop="-36dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_welcome_bg"
+        android:layout_marginTop="-36dp"
         android:adjustViewBounds="true"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_welcome_bg"/>
 
     <!--<ImageView-->
-        <!--android:id="@+id/iv_bg_1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@mipmap/bg_1"-->
-        <!--android:visibility="invisible"/>-->
+    <!--android:id="@+id/iv_bg_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@mipmap/bg_1"-->
+    <!--android:visibility="invisible"/>-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/iv_bg_2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@mipmap/bg_2"-->
-        <!--android:visibility="invisible"/>-->
+    <!--android:id="@+id/iv_bg_2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@mipmap/bg_2"-->
+    <!--android:visibility="invisible"/>-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/iv_bg_3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@mipmap/bg_3"-->
-        <!--android:visibility="invisible"/>-->
+    <!--android:id="@+id/iv_bg_3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@mipmap/bg_3"-->
+    <!--android:visibility="invisible"/>-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/iv_bg_4"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@mipmap/bg_4"-->
-        <!--android:visibility="invisible"/>-->
+    <!--android:id="@+id/iv_bg_4"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@mipmap/bg_4"-->
+    <!--android:visibility="invisible"/>-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/iv_bg_5"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@mipmap/bg_5"-->
-        <!--android:visibility="invisible"/>-->
+    <!--android:id="@+id/iv_bg_5"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@mipmap/bg_5"-->
+    <!--android:visibility="invisible"/>-->
 
     <ImageView
         android:id="@+id/iv_t"
